@@ -11,6 +11,5 @@ import java.util.Optional;
 public interface AffectationRepo extends JpaRepository<Affectation, Long> {
     Optional<Affectation> findAffectaionById(Long id);
     void deleteAffectaionById(Long id);
-    void addAffectationToCalendrierById(Long id);
 
 }
