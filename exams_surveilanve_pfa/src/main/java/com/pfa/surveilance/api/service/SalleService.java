@@ -1,6 +1,7 @@
 package com.pfa.surveilance.api.service;
 
 import com.pfa.surveilance.api.exception.UserNotFoundException;
+import com.pfa.surveilance.api.model.Matiere;
 import com.pfa.surveilance.api.model.Salle;
 import com.pfa.surveilance.api.model.Section;
 import com.pfa.surveilance.api.repo.SalleRepo;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -21,6 +23,11 @@ public class SalleService {
         this.salleRepo = salleRepo;
     }
     public Salle addSalle(Salle s){
+        Salle existingSalle = salleRepo.findSalleByRoomNumber(s.getRoomNumber());
+        if (existingSalle != null) {
+            throw new IllegalArgumentException("Subject with name " + s.getRoomNumber() + " already exists.");
+        }
+
         return salleRepo.save(s);
     }
     public List<Salle> findAllSalle(){

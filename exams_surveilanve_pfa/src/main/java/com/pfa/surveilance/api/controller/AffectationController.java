@@ -1,10 +1,9 @@
 package com.pfa.surveilance.api.controller;
 
 import com.pfa.surveilance.api.model.Affectation;
+import com.pfa.surveilance.api.model.Matiere;
 import com.pfa.surveilance.api.model.Prof;
-import com.pfa.surveilance.api.service.AffectationService;
-import com.pfa.surveilance.api.service.EmailService;
-import com.pfa.surveilance.api.service.ProfService;
+import com.pfa.surveilance.api.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +17,20 @@ public class AffectationController {
     private final AffectationService affectationService;
     private final ProfService profService;
     private final EmailService emailService;
+    private final MatiereService matiereService;
+    private final SalleService salleService;
+    private final SectionService sectionService;
 
 
-    public AffectationController(AffectationService affectationService,ProfService profService, EmailService emailService) {
+
+
+    public AffectationController(AffectationService affectationService,ProfService profService, EmailService emailService, MatiereService matiereService, SalleService salleService, SectionService sectionService) {
         this.affectationService = affectationService;
         this.profService= profService;
         this.emailService=emailService;
+        this.matiereService=matiereService;
+        this.salleService=salleService;
+        this.sectionService=sectionService;
     }
 
     @GetMapping("/all")
@@ -60,17 +67,33 @@ public class AffectationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
         Prof professor = profService.findOneProf(professorId);
-
         if (professor == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
         affectation.getProfessors().add(professor);
-
         Affectation savedAffectation = affectationService.addAffectation(affectation);
-        emailService.sendEmail(professor.getEmail(), "this is the subject", "this is the body");
-
-
+        emailService.sendEmail(professor.getEmail(), "Exima", "check your Exima app to see new assignments");
         return ResponseEntity.status(HttpStatus.CREATED).body(savedAffectation);
+    }
+    @PostMapping("/addMatiere/{affectationId}/{matiereId}")
+    public ResponseEntity<Affectation> addMatiereToAffectationByID(@PathVariable("affectationId") Long affectationId,
+                                                                     @PathVariable("matiereId") Long matiereId) {
+        Affectation a = affectationService.addMatiereToAffectation(affectationId,matiereId);
+        return new ResponseEntity<>(a, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/addSection/{affectationId}/{sectionId}")
+    public ResponseEntity<Affectation> addSectionToAffectationByID(@PathVariable("affectationId") Long affectationId,
+                                                                   @PathVariable("sectionId") Long sectionId) {
+        Affectation a = affectationService.addSectionToAffectation(affectationId,sectionId);
+        return new ResponseEntity<>(a, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/addSalle/{affectationId}/{salleId}")
+    public ResponseEntity<Affectation> addSalleToAffectationByID(@PathVariable("affectationId") Long affectationId,
+                                                                   @PathVariable("salleId") Long salleId) {
+        Affectation a = affectationService.addSalleToAffectation(affectationId,salleId);
+        return new ResponseEntity<>(a, HttpStatus.CREATED);
     }
     @DeleteMapping("/delete/{id}")
     @Transactional

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -16,10 +17,20 @@ public class MatiereService {
     private final MatiereRepo matiereRepo;
     @Autowired
     public MatiereService(MatiereRepo matiereRepo) {
+
         this.matiereRepo = matiereRepo;
     }
     public Matiere addMatiere(Matiere m){
-        return matiereRepo.save(m);
+        Matiere existingSubject= matiereRepo.findMatiereByName(m.getName());
+        System.out.println("*************");
+        System.out.println(matiereRepo.findMatiereByName(m.getName()));
+        System.out.println("*************");
+
+        if (existingSubject != null) {
+            throw new IllegalArgumentException("Subject with name " + m.getName() + " already exists.");
+        }
+        else{
+        return matiereRepo.save(m);}
     }
     public List<Matiere> findAllMatiere(){
         return matiereRepo.findAll();

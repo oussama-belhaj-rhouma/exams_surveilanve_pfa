@@ -4,12 +4,14 @@ import com.pfa.surveilance.api.exception.UserNotFoundException;
 import com.pfa.surveilance.api.model.Affectation;
 import com.pfa.surveilance.api.model.Matiere;
 import com.pfa.surveilance.api.model.Prof;
+import com.pfa.surveilance.api.model.Salle;
 import com.pfa.surveilance.api.repo.ProfRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -23,6 +25,10 @@ public class ProfService {
     }
 
     public Prof addProf(Prof p) {
+        Prof existingSalle = profRepo.findProfByUsername(p.getUsername());
+        if (existingSalle != null) {
+            throw new IllegalArgumentException("Subject with name " + p.getUsername() + " already exists.");
+        }
         return profRepo.save(p);
     }
 
