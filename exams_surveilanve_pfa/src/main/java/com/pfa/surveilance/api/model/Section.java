@@ -37,7 +37,8 @@ public class Section implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "professeur_id"))
     private List<Prof> professors= new ArrayList<>();
 
-
+    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Calendrier> calendriers = new ArrayList<>();
 
 
 }

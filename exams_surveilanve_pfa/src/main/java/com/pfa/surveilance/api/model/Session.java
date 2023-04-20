@@ -19,9 +19,9 @@ public class Session {
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true,length = 20)
-    private ESession session;
+    private ESession sessionName;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "session")
-    private List<Calendrier> calendrier= new ArrayList<>();
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Calendrier> calendriers = new ArrayList<>();
 
 }

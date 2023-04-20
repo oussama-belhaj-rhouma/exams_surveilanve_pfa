@@ -1,7 +1,6 @@
 package com.pfa.surveilance.api.controller;
 
 import com.pfa.surveilance.api.model.Affectation;
-import com.pfa.surveilance.api.model.Matiere;
 import com.pfa.surveilance.api.model.Prof;
 import com.pfa.surveilance.api.service.*;
 import org.springframework.http.HttpStatus;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/affectation")
@@ -60,21 +60,16 @@ public class AffectationController {
 
     @PostMapping("/addProf/{affectationId}/{professorId}")
     public ResponseEntity<Affectation> addProfessorToAffectationByID(@PathVariable("affectationId") Long affectationId,
-                                                                                   @PathVariable("professorId") Long professorId) {
-        Affectation affectation = affectationService.findOneAffectation(affectationId);
+                                                                     @PathVariable("professorId") Long professorId) {
+        Affectation savedAffectation = affectationService.addProfToAffectation(affectationId, professorId);
 
-        if (affectation == null) {
+        if (savedAffectation == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-        Prof professor = profService.findOneProf(professorId);
-        if (professor == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-        affectation.getProfessors().add(professor);
-        Affectation savedAffectation = affectationService.addAffectation(affectation);
-        emailService.sendEmail(professor.getEmail(), "Exima", "check your Exima app to see new assignments");
+
         return ResponseEntity.status(HttpStatus.CREATED).body(savedAffectation);
     }
+
     @PostMapping("/addMatiere/{affectationId}/{matiereId}")
     public ResponseEntity<Affectation> addMatiereToAffectationByID(@PathVariable("affectationId") Long affectationId,
                                                                      @PathVariable("matiereId") Long matiereId) {

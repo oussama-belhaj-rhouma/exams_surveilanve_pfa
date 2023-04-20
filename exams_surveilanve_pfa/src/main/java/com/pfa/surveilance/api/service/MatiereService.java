@@ -22,9 +22,6 @@ public class MatiereService {
     }
     public Matiere addMatiere(Matiere m){
         Matiere existingSubject= matiereRepo.findMatiereByName(m.getName());
-        System.out.println("*************");
-        System.out.println(matiereRepo.findMatiereByName(m.getName()));
-        System.out.println("*************");
 
         if (existingSubject != null) {
             throw new IllegalArgumentException("Subject with name " + m.getName() + " already exists.");

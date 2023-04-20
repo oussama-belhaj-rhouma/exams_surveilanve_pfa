@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -36,6 +37,7 @@ public class Affectation implements Serializable {
     private List<Prof> professors= new ArrayList<>();
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "calendrier_id")
+    @JsonIgnore
     private Calendrier calendrier;
 
     @ManyToOne

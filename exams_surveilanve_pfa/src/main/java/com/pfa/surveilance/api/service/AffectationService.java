@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -81,18 +82,19 @@ public class AffectationService {
 
     }
 
-    public Affectation addProfToAffectation(Long affectationId, Long profId) {
-        Affectation affectation = affectationRepo.findAffectaionById(affectationId)
+    public  Affectation addProfToAffectation(Long affectationId, Long profId) {
+        Affectation affectation = affectationRepo.findById(affectationId)
                 .orElseThrow(() -> new EntityNotFoundException("affectation not found with ID: " + affectationId));
 
-        Prof professor = profRepo.findProfById(profId)
-                .orElseThrow(() -> new EntityNotFoundException("affectation not found with ID: " + affectationId));
-
+        Prof professor = profRepo.findById(profId)
+                .orElseThrow(() -> new EntityNotFoundException("professor not found with ID: " + profId));
         affectation.getProfessors().add(professor);
-        emailService.sendEmail(professor.getEmail(), "Exima", "check your Exima app to see new assignments");
-        return affectationRepo.save(affectation);
 
+        Affectation savedAffectation = affectationRepo.save(affectation);
+        emailService.sendEmail(professor.getEmail(), "this is the subject", "this is the body");
+        return savedAffectation;
     }
+
 
     public void deleteAffectation(Long id){
         affectationRepo.deleteAffectaionById(id);
