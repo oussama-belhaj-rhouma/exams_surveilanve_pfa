@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/exams_surveilanve_pfa.iml" filepath="$PROJECT_DIR$/.idea/exams_surveilanve_pfa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exams_surveilanve_pfa/surveilance.iml" filepath="$PROJECT_DIR$/exams_surveilanve_pfa/surveilance.iml" />
+    </modules>
+  </component>
+</project>
