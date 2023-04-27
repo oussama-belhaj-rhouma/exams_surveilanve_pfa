@@ -44,4 +44,6 @@ public class SectionController {
     public void deleteSection(@PathVariable Long id) {
         sectionService.deleteSection(id);
     }
+
+
 }
