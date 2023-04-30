@@ -34,10 +34,6 @@ public class EtudiantService {
     }
 
     public Etudiant addEtudiant(Etudiant e) {
-        Optional<Etudiant> existingEtudinat = etudiantRepo.findEtudiantByUsername(e.getUsername());
-        if (existingEtudinat != null) {
-            throw new IllegalArgumentException("Subject with name " + e.getUsername() + " already exists.");
-        }
         return etudiantRepo.save(e);
     }
 
@@ -81,8 +77,10 @@ public class EtudiantService {
         System.out.println(username);
         System.out.println("------------------------");
         Etudiant e = etudiantRepo.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User by username "  + " was not found"));
+       // e.getSection().getCalendriers();
          List<Calendrier>calendriers=  calendrierRepo.findBySection(e.getSection());
         return calendriers;
+
 
     }
 }

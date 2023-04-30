@@ -6,6 +6,7 @@ import com.pfa.surveilance.api.model.Calendrier;
 import com.pfa.surveilance.api.model.Section;
 import com.pfa.surveilance.api.repo.AffectationRepo;
 import com.pfa.surveilance.api.repo.CalendrierRepo;
+import com.pfa.surveilance.api.repo.SectionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,13 @@ import java.util.List;
 public class CalendrierService {
     private final CalendrierRepo calendrierRepo;
     private final AffectationRepo affectationRepo;
+    private final SectionRepo sectionRepo;
+
     @Autowired
-    public CalendrierService(CalendrierRepo calendrierRepo, AffectationRepo affectationRepo) {
+    public CalendrierService(CalendrierRepo calendrierRepo, AffectationRepo affectationRepo, SectionRepo sectionRepo) {
         this.calendrierRepo = calendrierRepo;
         this.affectationRepo=affectationRepo;
+        this.sectionRepo=sectionRepo;
     }
     public Calendrier addCalendrier(Calendrier c){
         return calendrierRepo.save(c);
@@ -42,14 +46,24 @@ public class CalendrierService {
         Calendrier calendrier = calendrierRepo.findById(calendrierId)
                 .orElseThrow(() -> new EntityNotFoundException("Calendrier not found with ID: " + calendrierId));
 
-        if (calendrier.getAffectations().contains(affectation)) {
+        if (calendrier.getAffectations().stream().anyMatch(a -> a.getId().equals(affectationId))) {
             return calendrier;
         }
         calendrier.getAffectations().add(affectation);
 
         Calendrier calendrier1 = calendrierRepo.save(calendrier);
         return calendrier1;
+    }
 
+
+    public Calendrier addSectionToCalendrier(Long calendrierId, Long sectionId) {
+        Calendrier calendrier = calendrierRepo.findById(calendrierId)
+                .orElseThrow(() -> new EntityNotFoundException("calendrier not found with ID: " + calendrierId));
+
+        Section section = sectionRepo.findSectionById(sectionId)
+                .orElseThrow(() -> new EntityNotFoundException("Section not found with ID: " + sectionId));
+        calendrier.setSection(section);
+        return calendrierRepo.save(calendrier);
 
     }
     public void deleteCalendrier(Long id){

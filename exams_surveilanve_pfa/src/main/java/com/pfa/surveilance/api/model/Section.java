@@ -38,6 +38,7 @@ public class Section implements Serializable {
     private List<Prof> professors= new ArrayList<>();
 
     @OneToMany(mappedBy = "section", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Calendrier> calendriers = new ArrayList<>();
 
 

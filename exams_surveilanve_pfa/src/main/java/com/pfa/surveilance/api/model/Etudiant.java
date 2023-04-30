@@ -16,7 +16,7 @@ public class Etudiant implements Serializable{
 
     private String firstName;
     private String lastName;
-    @Column(unique = true)
+    @Column(name = "username", unique = true)
     private String username;
 
     private String email;

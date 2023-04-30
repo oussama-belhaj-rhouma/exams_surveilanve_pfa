@@ -43,12 +43,25 @@ public class CalendrierController {
         return new ResponseEntity<>(calendrier1, HttpStatus.OK);
     }
 
-    @PostMapping("/addAffectation/{calendarId}/{affectationId}")
-    public ResponseEntity<Calendrier> addAffectationToCalendarByID(@PathVariable("calendarId") Long calendarId,
-                                                                   @PathVariable("affectationId") Long affectationId) {
-        Calendrier c = calendrierService.addAffectationToCalendrier(calendarId,affectationId);
-        return new ResponseEntity<>(c, HttpStatus.CREATED);
+    @PostMapping("/addAffectation/{calendrierId}/{affectaionId}")
+    public ResponseEntity<Calendrier> addAffectationToCalendrierByID(@PathVariable("calendrierId") Long calendrierId,
+                                                                     @PathVariable("affectaionId") Long affectaionId) {
+        Calendrier savedCalendrier = calendrierService.addAffectationToCalendrier(calendrierId, affectaionId);
+
+        if (savedCalendrier == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedCalendrier);
     }
+
+    @PostMapping("/addSection/{celendrierId}/{sectionId}")
+    public ResponseEntity<Calendrier> addSectionToCalendrierByID(@PathVariable("celendrierId") Long celendrierId,
+                                                                   @PathVariable("sectionId") Long sectionId) {
+        Calendrier a = calendrierService.addSectionToCalendrier(celendrierId,sectionId);
+        return new ResponseEntity<>(a, HttpStatus.CREATED);
+    }
+
 
     @DeleteMapping("/delete/{id}")
     @Transactional
