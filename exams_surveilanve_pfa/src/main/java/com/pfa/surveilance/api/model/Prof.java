@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.pfa.surveilance.security.Models.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -23,7 +23,7 @@ public class Prof implements Serializable {
 
     private String prenom;
     private String nom;
-    @Column(unique = true)
+    @Column(name = "username", unique = true)
     private String username;
     @Column(unique = true)
     private String email;

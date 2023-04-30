@@ -7,6 +7,8 @@ import com.pfa.surveilance.api.model.Prof;
 import com.pfa.surveilance.api.model.Salle;
 import com.pfa.surveilance.api.repo.ProfRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,20 +21,23 @@ import java.util.Optional;
 public class ProfService {
     private final ProfRepo profRepo;
 
+
     @Autowired
     public ProfService(ProfRepo profRepo) {
         this.profRepo = profRepo;
     }
 
     public Prof addProf(Prof p) {
-        Prof existingSalle = profRepo.findProfByUsername(p.getUsername());
-        if (existingSalle != null) {
-            throw new IllegalArgumentException("Subject with name " + p.getUsername() + " already exists.");
-        }
+
         return profRepo.save(p);
     }
 
     public List<Prof> findAllProf() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        System.out.println("---------------------");
+        System.out.println(username);
+        System.out.println("------------------------");
         return profRepo.findAll();
     }
 
@@ -40,13 +45,18 @@ public class ProfService {
         return profRepo.save(p);
     }
 
-    public List<Affectation> getAffectationsByProfId(Long id) {
-        Prof prof = profRepo.findProfById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
+    public List<Affectation> getAffectationsByProfUsername() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        System.out.println("---------------------");
+        System.out.println(username);
+        System.out.println("------------------------");
+        Prof prof = profRepo.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User by username "  + " was not found"));
         return prof.getAffectations();
     }
 
-    public Prof findOneProf(Long id){
-        return profRepo.findProfById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
+    public Prof findOneProf(String s){
+        return profRepo.findProfByUsername(s).orElseThrow(() -> new UserNotFoundException("User by id " + " was not found"));
     }
 
     public void deleteProf(Long id) {

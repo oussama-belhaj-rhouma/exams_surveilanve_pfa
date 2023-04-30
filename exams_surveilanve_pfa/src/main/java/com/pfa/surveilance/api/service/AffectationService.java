@@ -5,6 +5,7 @@ import com.pfa.surveilance.api.model.*;
 
 import com.pfa.surveilance.api.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -82,17 +83,29 @@ public class AffectationService {
 
     }
 
-    public  Affectation addProfToAffectation(Long affectationId, Long profId) {
+    public Affectation addProfToAffectation(Long affectationId, Long profId) {
         Affectation affectation = affectationRepo.findById(affectationId)
                 .orElseThrow(() -> new EntityNotFoundException("affectation not found with ID: " + affectationId));
 
         Prof professor = profRepo.findById(profId)
                 .orElseThrow(() -> new EntityNotFoundException("professor not found with ID: " + profId));
-        affectation.getProfessors().add(professor);
 
-        Affectation savedAffectation = affectationRepo.save(affectation);
-        emailService.sendEmail(professor.getEmail(), "this is the subject", "this is the body");
-        return savedAffectation;
+        if (affectation.getProfessors().contains(professor)) {
+            return affectation;
+        }
+
+        if (affectation != null && professor != null) {
+            String email = professor.getEmail();
+             try{
+                affectation.getProfessors().add(professor);
+                emailService.sendEmail(email, "Exima", "check your Exima app to see new assignments");
+                return affectationRepo.save(affectation);
+            } catch (DataIntegrityViolationException e){
+            throw new IllegalArgumentException("Professor with username " + professor.getUsername() + " already exists");
+            }
+        } else {
+            throw new EntityNotFoundException("Affectation or Professor not found");
+        }
     }
 
 

@@ -7,6 +7,8 @@ import com.pfa.surveilance.api.service.AffectationService;
 import com.pfa.surveilance.api.service.ProfService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -16,6 +18,8 @@ import java.util.List;
 @RequestMapping("/prof")
 
 public class ProfController {
+
+
     private final ProfService profService;
     public ProfController(ProfService profService) {
         this.profService = profService;
@@ -26,14 +30,15 @@ public class ProfController {
         List<Prof> profs = profService.findAllProf();
         return new ResponseEntity<>(profs, HttpStatus.OK);
     }
-    @GetMapping("/{id}/affectations")
-    public List<Affectation> getProfHistory(@PathVariable Long id) {
-        return profService.getAffectationsByProfId(id);
+    @GetMapping("/affectations")
+    public List<Affectation> getProfHistory() {
+
+        return profService.getAffectationsByProfUsername();
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<Prof> getProfById(@PathVariable Long id) {
-        Prof prof = profService.findOneProf(id);
+    @GetMapping("/find/{s}")
+    public ResponseEntity<Prof> getProfByUsername(@PathVariable String s) {
+        Prof prof = profService.findOneProf(s);
         return new ResponseEntity<>(prof, HttpStatus.OK);
     }
 

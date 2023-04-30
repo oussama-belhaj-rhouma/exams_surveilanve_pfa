@@ -1,5 +1,6 @@
 package com.pfa.surveilance.api.controller;
 
+import com.pfa.surveilance.api.model.Calendrier;
 import com.pfa.surveilance.api.model.Section;
 import com.pfa.surveilance.api.model.Session;
 import com.pfa.surveilance.api.service.SectionService;
@@ -33,6 +34,13 @@ public class SessionController {
 
     public ResponseEntity<Session> addOneSection(@RequestBody Session section){
         Session s= sessionService.addSession(section);
+        return new ResponseEntity<>(s, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/addCalendrier/{sessionId}/{calendrierId}")
+    public ResponseEntity<Session> addAffectationToCalendarByID(@PathVariable("sessionId") Long sessionId,
+                                                                   @PathVariable("calendrierId") Long calendrierId) {
+        Session s = sessionService.addCalendarToSession(sessionId,calendrierId);
         return new ResponseEntity<>(s, HttpStatus.CREATED);
     }
     @PutMapping("/update")

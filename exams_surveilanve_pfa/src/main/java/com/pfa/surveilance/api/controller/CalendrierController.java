@@ -1,5 +1,6 @@
 package com.pfa.surveilance.api.controller;
 
+import com.pfa.surveilance.api.model.Affectation;
 import com.pfa.surveilance.api.model.Calendrier;
 import com.pfa.surveilance.api.service.CalendrierService;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,13 @@ public class CalendrierController {
     public ResponseEntity<Calendrier> updateCalendrier(@RequestBody Calendrier calendrier) {
         Calendrier calendrier1 = calendrierService.updateCalendrier(calendrier);
         return new ResponseEntity<>(calendrier1, HttpStatus.OK);
+    }
+
+    @PostMapping("/addAffectation/{calendarId}/{affectationId}")
+    public ResponseEntity<Calendrier> addAffectationToCalendarByID(@PathVariable("calendarId") Long calendarId,
+                                                                   @PathVariable("affectationId") Long affectationId) {
+        Calendrier c = calendrierService.addAffectationToCalendrier(calendarId,affectationId);
+        return new ResponseEntity<>(c, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")

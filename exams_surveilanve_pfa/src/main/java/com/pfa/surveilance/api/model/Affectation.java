@@ -2,6 +2,8 @@ package com.pfa.surveilance.api.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +22,12 @@ import lombok.*;
 public class Affectation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
-
     private String name;
-
+    private String day;
+    private String startTime;
+    private String finishTime;
     private String code;
     @ManyToOne
     @JoinColumn(name = "section_id")

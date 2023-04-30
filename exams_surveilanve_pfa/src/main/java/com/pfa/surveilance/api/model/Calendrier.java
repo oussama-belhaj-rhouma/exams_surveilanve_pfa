@@ -2,6 +2,7 @@ package com.pfa.surveilance.api.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,8 @@ public class Calendrier implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private String startDay;
+    private String endDay;
 
     @ManyToOne
     @JoinColumn(name = "session_id")
