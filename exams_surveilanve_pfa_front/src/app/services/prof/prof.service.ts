@@ -15,11 +15,11 @@ export class ProfService {
     });
   }
 
-  // public getProf(id: number): Observable<Prof> {
-  //   return this.http.get<Prof>('http://localhost:8080/prof/find/${id}', {
-  //     withCredentials: true,
-  //   });
-  // }
+   public getProf(id: number): Observable<Prof> {
+    return this.http.get<Prof>(`http://localhost:8080/prof/find/${id}`, {
+      withCredentials: true,
+   });
+   }
 
   public addProf(p: Prof): Observable<Prof> {
     return this.http.post<Prof>('http://localhost:8080/prof/add', p, {

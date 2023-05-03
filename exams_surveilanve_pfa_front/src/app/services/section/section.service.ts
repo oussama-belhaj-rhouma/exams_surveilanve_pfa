@@ -15,11 +15,11 @@ export class SectionService {
     });
   }
 
-  // public getSection(id: number): Observable<Section> {
-  //   return this.http.get<Section>('http://localhost:8080/section/find/${id}', {
-  //     withCredentials: true,
-  //   });
-  // }
+   public getSection(id: number): Observable<Section> {
+     return this.http.get<Section>(`http://localhost:8080/section/find/${id}`, {
+       withCredentials: true,
+     });
+   }
 
   public addSection(s: Section): Observable<Section> {
     return this.http.post<Section>('http://localhost:8080/section/add', s, {

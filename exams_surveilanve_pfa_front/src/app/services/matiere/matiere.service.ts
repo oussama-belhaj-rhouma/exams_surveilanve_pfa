@@ -15,11 +15,11 @@ export class MatiereService {
     });
   }
 
-  // public getMatiere(id: number): Observable<Matiere> {
-  //   return this.http.get<Matiere>('http://localhost:8080/matiere/find/${id}', {
-  //     withCredentials: true,
-  //   });
-  // }
+   public getMatiere(id: number): Observable<Matiere> {
+     return this.http.get<Matiere>('http://localhost:8080/matiere/find/${id}', {
+       withCredentials: true,
+     });
+   }
 
   public addMatiere(m: Matiere): Observable<Matiere> {
     return this.http.post<Matiere>('http://localhost:8080/matiere/add', m, {
@@ -38,4 +38,6 @@ export class MatiereService {
       withCredentials: true,
     });
   }
+
+  
 }

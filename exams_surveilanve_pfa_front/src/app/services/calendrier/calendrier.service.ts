@@ -33,6 +33,15 @@ export class CalendrierService {
     });
   }
 
+public addAffectation(affectationId: number, calendrierId: number): Observable<Calendrier>{
+  return this.http.post<Calendrier>(`http://localhost:8080/calendrier/addAffectaion/${calendrierId}/${affectationId}`, null) 
+
+}
+
+public addSection(sectionId: number, calendrierId: number): Observable<Calendrier>{
+  return this.http.post<Calendrier>(`http://localhost:8080/calendrier/addSection/${calendrierId}/${sectionId}`, null)
+}
+
   public deleteCalendrier(id: number): Observable<void> {
     return this.http.delete<void>(`http://localhost:8080/calendrier/delete/${id}`, {
       withCredentials: true,

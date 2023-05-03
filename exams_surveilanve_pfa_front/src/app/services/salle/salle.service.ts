@@ -15,11 +15,11 @@ export class SalleService {
     });
   }
 
-  // public getSalle(id: number): Observable<Salle> {
-  //   return this.http.get<Salle>('http://localhost:8080/salle/find/${id}', {
-  //     withCredentials: true,
-  //   });
-  // }
+   public getSalle(id: number): Observable<Salle> {
+     return this.http.get<Salle>(`http://localhost:8080/salle/find/${id}`, {
+       withCredentials: true,
+     });
+   }
 
   public addSalle(s: Salle): Observable<Salle> {
     return this.http.post<Salle>('http://localhost:8080/salle/add', s, {
