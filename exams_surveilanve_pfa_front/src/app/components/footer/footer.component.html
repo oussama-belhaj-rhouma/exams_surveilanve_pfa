@@ -1,1 +1,104 @@
-<p>footer works!</p>
+<div id="contact" class="footer">
+  <div class="custom-shape-divider-top-1651879645">
+    <svg
+      data-name="Layer 1"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1200 120"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+        class="shape-fill"
+      ></path>
+    </svg>
+  </div>
+  <div class="contactUsContainer">
+    <div class="text">
+      <h3>Contactez-Nous</h3>
+      <p>
+        Avez-vous des questions ou voulez-vous collaborer avec nous ? N’hesitez
+        pas de nous contacter :
+      </p>
+    </div>
+    <div class="formContainer">
+          <form onSubmit="(event) => contact(event)">
+              <input
+                required
+                type="text"
+                class="name"
+                placeholder="Nom">
+              <input
+                required
+                type="text"
+                class="email"
+                placeholder="email"
+              >
+              <input
+                required
+                type="text"
+                className={styles.subject}
+                placeholder="sujet"
+              >
+              <textarea
+                required
+                row="5"
+                className={styles.msg}
+                placeholder="message"
+              ></textarea>
+              <button className={styles.submitBtn}>Envoyer</button>
+            </form>
+            <h6
+              style=" color: white; font-Size: 20px; padding-Top: 20px" >
+              Message envoyé avec succes
+              <!-- <TiTickOutline color="white" fontSize="25px"></TiTickOutline> -->
+            </h6>
+          
+        </div>
+  </div>
+  <div className="{styles.actualFooter}">
+    <!-- <HashLink to="/#">
+          <img
+            width="100px"
+            src={mask}
+            alt="Dweya logo"
+            style={{ objectFit: "cover" }}
+          ></img>
+        </HashLink> -->
+    <div class="navbar">
+      <a href="/#" class="a">
+        <span class="navbarLink">Acceuil</span>
+      </a>
+      <a href="/products#" class="a">
+        <span class="navbarLink">Produits</span>
+      </a>
+      <a href="/signup" class="a">
+        <span class="navbarLink">S'inscrire</span>
+      </a>
+      <a href="/login" class="a">
+        <span class="navbarLink">Se connecter</span>
+      </a>
+    </div>
+    <div class="contactInfo">
+      <span>
+        <img src="" class="tel" />
+        contact@dweya.tn
+      </span>
+      <span>
+        <img src="" classe="tel" />
+        +216 54 389 306
+      </span>
+    </div>
+    <div class="socialMedia">
+      <a target="_blank" href="https://www.facebook.com/Dweya.tn">
+        <img src="" />
+      </a>
+      <a target="_blank" href="https://www.instagram.com/dweya_tn/">
+        <img src="" />
+      </a>
+      <a target="_blank" href="https://www.linkedin.com">
+        <img src="" />
+      </a>
+    </div>
+    <h5 class="madeWithlove">Made with ♡ by INNOVAR</h5>
+  </div>
+</div>

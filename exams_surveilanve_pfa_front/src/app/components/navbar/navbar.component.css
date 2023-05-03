@@ -1,0 +1,80 @@
+.main {
+  background-color: white;
+  box-shadow: 0 5px 5px 1px #00000014;
+}
+
+.container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  cursor: pointer;
+  width: 60px;
+  height: 70px;
+  margin-left: 50px;
+}
+
+
+.items {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 40px;
+  width: 100%;
+  margin-right: 30px;
+  margin-left: 10px;
+  padding-top: 10px;
+}
+
+.itemss {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.navBarItem {
+  margin-right: 20px;
+  font-family: "poppins";
+  color: black;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-block;
+}
+.navBarItem {
+  position: relative;
+  transition: all 0.5s;
+}
+.navBarItem:hover {
+  color: black;
+}
+
+.navBarItem:after,
+.navBarItem:before {
+  transition: all 0.5s;
+}
+
+.navBarItem:after {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: ".";
+  color: transparent;
+  background: #21aea6;
+  height: 2px;
+}
+.navBarItem:hover:after {
+  width: 100%;
+}
+
