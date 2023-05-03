@@ -27,9 +27,9 @@ public class EtudiantController {
         return new ResponseEntity<>(etudiants, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{s}")
-    public ResponseEntity<Etudiant> getEtudiantById(@PathVariable String s) {
-        Etudiant etudiant = etudiantService.findOneEtudiant(s);
+    @GetMapping("/find")
+    public ResponseEntity<Etudiant> getEtudiantByUsername() {
+        Etudiant etudiant = etudiantService.findOneEtudiant();
         return new ResponseEntity<>(etudiant, HttpStatus.OK);
     }
 

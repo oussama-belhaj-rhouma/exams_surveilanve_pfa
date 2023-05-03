@@ -36,9 +36,9 @@ public class ProfController {
         return profService.getAffectationsByProfUsername();
     }
 
-    @GetMapping("/find/{s}")
-    public ResponseEntity<Prof> getProfByUsername(@PathVariable String s) {
-        Prof prof = profService.findOneProf(s);
+    @GetMapping("/find")
+    public ResponseEntity<Prof> getProfByUsername() {
+        Prof prof = profService.findOneProf();
         return new ResponseEntity<>(prof, HttpStatus.OK);
     }
 

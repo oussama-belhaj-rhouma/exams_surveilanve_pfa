@@ -38,11 +38,7 @@ public class EtudiantService {
     }
 
     public List<Etudiant> findAllEtudiant() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        System.out.println("---------------------");
-        System.out.println(username);
-        System.out.println("------------------------");
+
         return etudiantRepo.findAll();
     }
 
@@ -51,8 +47,13 @@ public class EtudiantService {
     }
 
 
-    public Etudiant findOneEtudiant(String s){
-        return etudiantRepo.findEtudiantByUsername(s).orElseThrow(() -> new UserNotFoundException("User by id " + " was not found"));
+    public Etudiant findOneEtudiant(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        System.out.println("---------------------");
+        System.out.println(username);
+        System.out.println("------------------------");
+        return etudiantRepo.findEtudiantByUsername(username).orElseThrow(() -> new UserNotFoundException("User by username " +username+  " was not found"));
     }
 
     public void deleteEtudiant(Long id) {

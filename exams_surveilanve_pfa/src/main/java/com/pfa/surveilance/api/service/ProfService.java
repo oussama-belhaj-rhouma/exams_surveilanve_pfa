@@ -55,8 +55,13 @@ public class ProfService {
         return prof.getAffectations();
     }
 
-    public Prof findOneProf(String s){
-        return profRepo.findProfByUsername(s).orElseThrow(() -> new UserNotFoundException("User by id " + " was not found"));
+    public Prof findOneProf(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        System.out.println("---------------------");
+        System.out.println(username);
+        System.out.println("------------------------");
+        return profRepo.findProfByUsername(username).orElseThrow(() -> new UserNotFoundException("User by username " +username + " was not found"));
     }
 
     public void deleteProf(Long id) {
