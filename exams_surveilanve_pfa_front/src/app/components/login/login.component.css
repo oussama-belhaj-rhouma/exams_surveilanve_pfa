@@ -5,12 +5,14 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+  width: 100%;
   margin-top: 6px;
 }
 
 .h1 {
   font-weight: bold;
   margin: 0;
+  padding-top: 2rem;
 
   font-size: 28px;
 }
@@ -20,6 +22,7 @@
   font-weight: normal;
   color: #8d8d8d;
   font-size: 18px;
+  padding: 0.5rem;
 }
 
 .a {
@@ -72,6 +75,8 @@
   color: #6d6a6a;
   font-weight: bold;
   padding-bottom: 20px;
+  cursor: pointer;
+
 }
 
 .input {
@@ -86,6 +91,9 @@
 
 .nav--logo{
   padding-top: 30px;
+  width: 120px;
+
+  height: auto;
 }
 .input:focus,
 .input:active {

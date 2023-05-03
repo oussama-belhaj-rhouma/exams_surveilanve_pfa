@@ -7,6 +7,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfProfileComponent } from './components/prof-profile/prof-profile.component';
 import { AppRoutingModule } from './app-routing.module';
+import { RegisterComponent } from './components/register/register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,11 +17,14 @@ import { AppRoutingModule } from './app-routing.module';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
-    ProfProfileComponent
+    ProfProfileComponent,
+    RegisterComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
