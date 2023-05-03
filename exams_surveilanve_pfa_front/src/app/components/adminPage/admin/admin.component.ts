@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
-  selector: 'app-prof-profile',
-  templateUrl: './prof-profile.component.html',
-  styleUrls: ['./prof-profile.component.css']
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css']
 })
-export class ProfProfileComponent implements OnInit { 
+export class AdminComponent implements OnInit { 
   currentUser: any;
 
 
@@ -17,4 +17,3 @@ export class ProfProfileComponent implements OnInit {
     this.currentUser = this.storageService.getUser();
   }
 }
-

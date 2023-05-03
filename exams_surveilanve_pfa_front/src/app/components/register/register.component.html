@@ -66,6 +66,13 @@
               #password="ngModel"
               [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
             />
+            <label>
+                <input type="radio" name="role" value="professor" [(ngModel)]="isProf"> Professeur
+              </label>
+              <label>
+                <input type="radio" value="student" name="role" [(ngModel)]="isStudent"> Etudiant
+              </label>
+
             <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
               <div *ngIf="password.errors['required']">Password is required</div>
               <div *ngIf="password.errors['minlength']">
@@ -78,7 +85,7 @@
           </div>
           <h3 class="h3" routerLink="/login">Vous avez déja un compte ?</h3>
           <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-            Signup failed!<br />{{ errorMessage }}
+            Signup failed!<br/>{{ errorMessage }}
           </div>
         <br>
         <br>

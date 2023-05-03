@@ -10,6 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminComponent } from './components/adminPage/admin/admin.component';
+import { EtudiantComponent } from './components/etudiantPage/etudiant/etudiant.component';
+import { ProfComponent } from './components/profPage/prof/prof.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     LoginComponent,
     ProfProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent,
+    EtudiantComponent,
+    ProfComponent
   ],
   imports: [
     FormsModule,

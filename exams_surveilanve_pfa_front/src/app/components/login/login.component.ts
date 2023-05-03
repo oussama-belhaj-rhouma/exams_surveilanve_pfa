@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit{
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
-        this.routs.navigate(['/home']).then(() => {
+        this.routs.navigate(['/admin']).then(() => {
           window.location.reload();
         })
         localStorage.setItem('token',this.storageService.getUser().accessToken);

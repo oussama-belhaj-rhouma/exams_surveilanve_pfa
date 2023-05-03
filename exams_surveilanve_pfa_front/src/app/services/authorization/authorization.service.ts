@@ -28,7 +28,7 @@ export class AuthorizationService {
     return this.token;
   }
 
-  register(username: string, email: string, password: string): Observable<any> {
+  register(username: string, email: string, password: string, role : string[]): Observable<any> {
     
     return this.http.post(
       AUTH_API + 'signup',
@@ -36,6 +36,7 @@ export class AuthorizationService {
         username,
         email,
         password,
+        role
       },
       httpOptions
     );
