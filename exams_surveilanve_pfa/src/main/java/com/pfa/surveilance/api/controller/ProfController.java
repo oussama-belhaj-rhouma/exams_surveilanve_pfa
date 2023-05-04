@@ -31,9 +31,9 @@ public class ProfController {
         return new ResponseEntity<>(profs, HttpStatus.OK);
     }
     @GetMapping("/{s}/affectations")
-    public List<Affectation> getProfHistory(@PathVariable String s) {
-
-        return profService.getAffectationsByProfUsername(s);
+    public ResponseEntity<List<Affectation>> getProfHistory(@PathVariable String s) {
+        List<Affectation> affectations = profService.getAffectationsByProfUsername(s);
+        return ResponseEntity.ok().body(affectations);
     }
 
     @GetMapping("/find/{s}")

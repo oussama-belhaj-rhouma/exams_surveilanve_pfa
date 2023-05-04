@@ -5,6 +5,7 @@ import { Prof } from 'src/app/models/Prof';
 import { ProfService } from 'src/app/services/prof/prof.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
+
 @Component({
   selector: 'app-prof-profile',
   templateUrl: './prof-profile.component.html',
@@ -20,13 +21,13 @@ export class ProfProfileComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser();
     this.getProf();
+    this.getHistory();
   }
 
   public getProf(): void {
     this.profService.getProf(this.currentUser.username).subscribe(
       (      Response: Prof)=>{
         this.currentProf=Response;
-        console.log(this.currentProf.affectations)
       }, 
       (error : HttpErrorResponse)=>{
         if (error.error) {
@@ -47,7 +48,7 @@ export class ProfProfileComponent implements OnInit {
     this.profService.getHistory(this.currentUser.username).subscribe(
       (      Response: Affectation[])=>{
         this.history=Response;
-        console.log(this.history)
+        console.log(Response)
       }, 
       (error : HttpErrorResponse)=>{
         if (error.error) {

@@ -40,10 +40,9 @@ export class ProfService {
     });
   }
 
-  public getHistory(s: string): Observable<Affectation[]>{
-    return this.http.get<Affectation[]>(`http://localhost:8080/prof/${s}/affectations`, {
-      withCredentials: true,
+  public getHistory(s: string): Observable<any> {
+    return this.http.get(`http://localhost:8080/prof/${s}/affectations`, {
+      withCredentials: true
     });
-
   }
 }
