@@ -1,14 +1,22 @@
 <div class="main">
+
   <header class="container">
     <a href="/#">
       <img class="logo" src="../../../assets/images/logo.svg" />
     </a>
 
     <nav class="items">
-      <a class="navBarItem" href=""> Acceuil </a>
-      <a class="navBarItem" href=""> element2 </a>
-      <a class="navBarItem" href=""> element3 </a>
-      <a class="navBarItem" href=""> element4 </a>
+      <a  class="navBarItem" *ngIf="showAdminBoard" href="/admin" > Dashbord </a>
+      <a  class="navBarItem" *ngIf="showProfessorBoard" href="/prof"> Prof profile </a>
+      <a  class="navBarItem" *ngIf="showEtudiantBoard" href="/etudaint"> Etudiant calendriers </a>
+      <a  class="navBarItem" *ngIf="showEtudiantBoard" href="/etudiant"> Etudiant profile </a>
+
+
+      <a class="navBarItem"  *ngIf="!isLoggedIn" href="/register" routerLink="register"> Sign Up </a>
+      <a class="navBarItem"   *ngIf="!isLoggedIn"href="/login" routerLink="login"> Login </a>
+      <a href="/login" class="navBarItem" (click)="logout()" routerLink="login"   *ngIf="isLoggedIn">LogOut</a>
+
+
     </nav>
 
   </header>

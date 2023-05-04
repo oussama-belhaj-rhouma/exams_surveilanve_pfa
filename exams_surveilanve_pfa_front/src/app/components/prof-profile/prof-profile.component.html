@@ -3,7 +3,7 @@
 
   <div class="parent">
     <div class="container">
-      <p class="text">Bienvenue Mr Foulen</p>
+      <p class="text">Bienvenue Mr {{currentProf.prenom}}</p>
     </div>
     <img
       src="../../../assets/images/Toppagevector.png"
@@ -49,11 +49,11 @@
       <form name="form" method="post">
         <div class="wrapper">
           <div class="box">
-            <label class="label">Nom et prénom:</label>
+            <label class="label">Prénom:</label>
             <div class="davdouv">
               <input
                 class="input"
-                value="Foulen Fouleni"
+                value={{currentProf.prenom}} 
                 id="name"
                 type="text"
                 name="name"
@@ -67,7 +67,7 @@
             <div class="davdouv">
               <input
                 class="input"
-                value="el Master grade"
+                value={{currentProf.grade}}
                 id="numero"
                 type="text"
                 name="numero"
@@ -78,11 +78,11 @@
         </div>
         <div class="wrapper">
           <div class="box">
-            <label class="label">CIN:</label>
+            <label class="label">Prénom :</label>
             <div class="davdouv">
               <input
                 class="input"
-                value="11111111"
+                value={{currentProf.nom}}
                 id="ville"
                 type="text"
                 name="ville"
@@ -95,7 +95,7 @@
             <div class="davdouv">
               <input
                 class="input"
-                value="man9oulech"
+                value={{currentProf.password}}
                 id="codePostal"
                 type="text"
                 name="codePostal"
@@ -110,7 +110,7 @@
             <div class="davdouv2">
               <input
                 class="adress input"
-                value="foulenfouleni@gmail.com"
+                value={{currentProf.email}}
                 type="text"
                 name="adress"
                 required
@@ -172,7 +172,9 @@
         "
       >
     </div>
-    
+    <div *ngFor="let a of history">
+      {{a.code}}
+    </div>
     </div>
     <!-- <Title
             text1="Details"

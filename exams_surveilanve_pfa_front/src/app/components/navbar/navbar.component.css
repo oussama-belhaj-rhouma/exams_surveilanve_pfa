@@ -4,8 +4,8 @@
 }
 
 .container {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,8 +13,8 @@
 
 .logo {
   cursor: pointer;
-  width: 70px;
-  height: 80px;
+  width: 90px;
+  height: 100px;
   margin-left: 50px;
 }
 
@@ -74,6 +74,8 @@
   background: #21aea6;
   height: 2px;
 }
+
+
 .navBarItem:hover:after {
   width: 100%;
 }

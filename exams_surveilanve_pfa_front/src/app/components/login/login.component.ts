@@ -8,6 +8,7 @@ import { StorageService } from 'src/app/services/storage/storage.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit{
   form: any = {
     username: null,
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit{
       this.roles = this.storageService.getUser().roles;
     }
   }
+ 
 
   onSubmit(): void {
     const { username, password } = this.form;

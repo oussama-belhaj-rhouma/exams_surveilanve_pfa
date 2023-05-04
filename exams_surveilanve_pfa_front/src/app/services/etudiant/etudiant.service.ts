@@ -17,8 +17,8 @@ export class EtudiantService {
     });
   }
 
-   public getEtudiant(id: number): Observable<Etudiant> {
-     return this.http.get<Etudiant>('http://localhost:8080/etudiant/find/${id}', {
+   public getEtudiant(s: string): Observable<Etudiant> {
+     return this.http.get<Etudiant>(`http://localhost:8080/etudiant/find/${s}`, {
     withCredentials: true,
     });
    }

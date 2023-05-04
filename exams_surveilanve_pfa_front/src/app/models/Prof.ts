@@ -8,6 +8,8 @@ export interface Prof {
     prenom: string;
     nom: string;
     grade: EGrade ;
+    email: string;
+    password: string;
     affectations: Affectation[] ;
     sections: Section[];
     matieres: Matiere[];

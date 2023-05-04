@@ -1,10 +1,11 @@
 import { Section } from "./Section"
 
 export interface Etudiant {
-    firstName: String,
-    lastName: String,
-    email: String,
-    username: String
+    id: number,
+    firstName: string,
+    lastName: string,
+    username: string
+    email: string,
     section: Section
 
 }

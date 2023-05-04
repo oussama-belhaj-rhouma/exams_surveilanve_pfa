@@ -7,6 +7,9 @@ import { Salle } from './Salle';
 export interface Affectation {
   id: number;
   name: string;
+  day: string;
+  startTime: string;
+  finishTime: string;
   code: string;
   section: Section;
   professors: Prof[];

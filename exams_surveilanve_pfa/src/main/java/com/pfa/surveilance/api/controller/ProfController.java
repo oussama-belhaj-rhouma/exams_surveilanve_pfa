@@ -30,15 +30,15 @@ public class ProfController {
         List<Prof> profs = profService.findAllProf();
         return new ResponseEntity<>(profs, HttpStatus.OK);
     }
-    @GetMapping("/affectations")
-    public List<Affectation> getProfHistory() {
+    @GetMapping("/{s}/affectations")
+    public List<Affectation> getProfHistory(@PathVariable String s) {
 
-        return profService.getAffectationsByProfUsername();
+        return profService.getAffectationsByProfUsername(s);
     }
 
-    @GetMapping("/find")
-    public ResponseEntity<Prof> getProfByUsername() {
-        Prof prof = profService.findOneProf();
+    @GetMapping("/find/{s}")
+    public ResponseEntity<Prof> getProfByUsername( @PathVariable String s) {
+        Prof prof = profService.findOneProf(s);
         return new ResponseEntity<>(prof, HttpStatus.OK);
     }
 

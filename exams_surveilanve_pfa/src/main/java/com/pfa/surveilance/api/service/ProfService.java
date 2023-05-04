@@ -45,23 +45,23 @@ public class ProfService {
         return profRepo.save(p);
     }
 
-    public List<Affectation> getAffectationsByProfUsername() {
+    public List<Affectation> getAffectationsByProfUsername(String s) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         System.out.println("---------------------");
         System.out.println(username);
         System.out.println("------------------------");
-        Prof prof = profRepo.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User by username "  + " was not found"));
+        Prof prof = profRepo.findByUsername(s).orElseThrow(() -> new UserNotFoundException("User by username "  + s+ " was not found"));
         return prof.getAffectations();
     }
 
-    public Prof findOneProf(){
+    public Prof findOneProf(String s){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         System.out.println("---------------------");
         System.out.println(username);
         System.out.println("------------------------");
-        return profRepo.findProfByUsername(username).orElseThrow(() -> new UserNotFoundException("User by username " +username + " was not found"));
+        return profRepo.findProfByUsername(s).orElseThrow(() -> new UserNotFoundException("User by username " +username + " was not found"));
     }
 
     public void deleteProf(Long id) {

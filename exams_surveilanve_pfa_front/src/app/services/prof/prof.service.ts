@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Affectation } from 'src/app/models/Affectation';
 import { Prof } from 'src/app/models/Prof';
 
 @Injectable({
@@ -15,8 +16,8 @@ export class ProfService {
     });
   }
 
-   public getProf(id: number): Observable<Prof> {
-    return this.http.get<Prof>(`http://localhost:8080/prof/find/${id}`, {
+   public getProf(s: string): Observable<Prof> {
+    return this.http.get<Prof>(`http://localhost:8080/prof/find/${s}`, {
       withCredentials: true,
    });
    }
@@ -37,5 +38,12 @@ export class ProfService {
     return this.http.delete<void>(`http://localhost:8080/prof/delete/${id}`, {
       withCredentials: true,
     });
+  }
+
+  public getHistory(s: string): Observable<Affectation[]>{
+    return this.http.get<Affectation[]>(`http://localhost:8080/prof/${s}/affectations`, {
+      withCredentials: true,
+    });
+
   }
 }

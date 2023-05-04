@@ -11,7 +11,7 @@
         <img class="nav--logo" src="../../../assets/images/user.svg" alt="logo" />
         <br>
         <br>
-        <h1 class="h1">Créer un nouveay compte</h1>
+        <h1 class="h1">Créer un nouveau compte</h1>
         <br>
          
             <input
@@ -67,10 +67,10 @@
               [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
             />
             <label>
-                <input type="radio" name="role" value="professor" [(ngModel)]="isProf"> Professeur
+                <input  type="radio" name="role" value="professor" [(ngModel)]="isProf"> Professeur
               </label>
               <label>
-                <input type="radio" value="student" name="role" [(ngModel)]="isStudent"> Etudiant
+                <input  type="radio" value="student" name="role" [(ngModel)]="isStudent"> Etudiant
               </label>
 
             <div class="invalid-feedback" *ngIf="password.errors && f.submitted">

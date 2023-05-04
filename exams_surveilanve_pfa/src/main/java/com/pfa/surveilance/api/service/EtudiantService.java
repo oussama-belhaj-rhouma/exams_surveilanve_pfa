@@ -47,13 +47,13 @@ public class EtudiantService {
     }
 
 
-    public Etudiant findOneEtudiant(){
+    public Etudiant findOneEtudiant(String s){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         System.out.println("---------------------");
         System.out.println(username);
         System.out.println("------------------------");
-        return etudiantRepo.findEtudiantByUsername(username).orElseThrow(() -> new UserNotFoundException("User by username " +username+  " was not found"));
+        return etudiantRepo.findEtudiantByUsername(s).orElseThrow(() -> new UserNotFoundException("User by username " +username+  " was not found"));
     }
 
     public void deleteEtudiant(Long id) {

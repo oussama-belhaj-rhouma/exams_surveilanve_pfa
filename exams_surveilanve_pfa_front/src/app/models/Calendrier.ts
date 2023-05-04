@@ -1,10 +1,12 @@
 import { Session } from './Session';
 import { Affectation } from './Affectation';
+import { Section } from './Section';
 
 export interface Calendrier {
   id: number;
-  startTime: Date;
-  endTime: Date;
+  startDay: Date;
+  endDay: Date;
   session: Session;
   affectations: Affectation[];
+  section: Section
 }

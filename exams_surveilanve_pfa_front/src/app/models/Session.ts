@@ -3,6 +3,6 @@ import { Calendrier } from './Calendrier';
 
 export interface Session {
   id: number;
-  session: ESession;
+  sessionName: ESession;
   calendrier: Calendrier;
 }

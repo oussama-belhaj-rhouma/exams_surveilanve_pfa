@@ -106,4 +106,7 @@
     left: 24px;
     top: 5px;
   }
+  label input[type="radio"] {
+    display: inline-block;
+  }
   
