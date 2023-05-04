@@ -42,7 +42,8 @@ export class AuthorizationService {
     );
   }
   logout(){
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
+    localStorage.removeItem('auth-user')
   }
 
 

@@ -7,3 +7,33 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #75f2bd #f0f0f0;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #21aea6;
+  border-radius: 10px;
+  border: 3px solid #f0f0f0;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #15706c;
+  border-radius: 10px;
+  border: 3px solid #f0f0f0;
+}
+
+html {
+  scroll-behavior: smooth;
+}

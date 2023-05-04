@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './components/adminPage/admin/admin.component';
 import { EtudiantComponent } from './components/etudiantPage/etudiant/etudiant.component';
 import { ProfComponent } from './components/profPage/prof/prof.component';
+import { HistoryCardComponent } from './components/history-card/history-card.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProfComponent } from './components/profPage/prof/prof.component';
     RegisterComponent,
     AdminComponent,
     EtudiantComponent,
-    ProfComponent
+    ProfComponent,
+    HistoryCardComponent
   ],
   imports: [
     FormsModule,

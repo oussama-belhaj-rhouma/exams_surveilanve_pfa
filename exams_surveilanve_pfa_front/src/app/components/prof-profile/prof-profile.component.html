@@ -1,9 +1,7 @@
 <div id="order" style="background-color: #e7f6f2">
-
-
   <div class="parent">
     <div class="container">
-      <p class="text">Bienvenue Mr {{currentProf.prenom}}</p>
+      <p class="text">Bienvenue Mr {{ currentProf.prenom }}</p>
     </div>
     <img
       src="../../../assets/images/Toppagevector.png"
@@ -53,7 +51,7 @@
             <div class="davdouv">
               <input
                 class="input"
-                value={{currentProf.prenom}} 
+                value="{{ currentProf.prenom }}"
                 id="name"
                 type="text"
                 name="name"
@@ -66,8 +64,9 @@
             <label class="label">Grade:</label>
             <div class="davdouv">
               <input
+                disabled
                 class="input"
-                value={{currentProf.grade}}
+                value="{{ currentProf.grade }}"
                 id="numero"
                 type="text"
                 name="numero"
@@ -78,11 +77,11 @@
         </div>
         <div class="wrapper">
           <div class="box">
-            <label class="label">Prénom :</label>
+            <label class="label">Nom :</label>
             <div class="davdouv">
               <input
                 class="input"
-                value={{currentProf.nom}}
+                value="{{ currentProf.nom }}"
                 id="ville"
                 type="text"
                 name="ville"
@@ -95,7 +94,7 @@
             <div class="davdouv">
               <input
                 class="input"
-                value={{currentProf.password}}
+                value="{{ currentProf.password }}"
                 id="codePostal"
                 type="text"
                 name="codePostal"
@@ -110,7 +109,7 @@
             <div class="davdouv2">
               <input
                 class="adress input"
-                value={{currentProf.email}}
+                value="{{ currentProf.email }}"
                 type="text"
                 name="adress"
                 required
@@ -170,24 +169,30 @@
           background-color: #0b6d87;
           margin-bottom: 5px;
         "
-      >
+      ></div>
+      <div class="cardsContainer">
+        <app-history-card
+          number="1"
+          imageUrl="../../../assets/images/Calendar.svg"
+          date="07/03/2023"
+        ></app-history-card>
+        <app-history-card
+          number="2"
+          imageUrl="../../../assets/images/Calendar.svg"
+          date="14/01/2023"
+        ></app-history-card>
+        <app-history-card
+          number="3"
+          imageUrl="../../../assets/images/Calendar.svg"
+          date="21/11/2022"
+        ></app-history-card>
+      </div>
     </div>
-    <div *ngFor="let a of history">
-      {{a.day}}
-      {{a.startTime}}
-      {{a.finishTime}}
-    </div>
-    </div>
-    <!-- <Title
-            text1="Details"
-            text2="de votre commande"
-            color1="#46EDA7"
-            color2="#000000"
-            linecolor="#46EDA7"
-          /> -->
   </div>
-  <br>
-  <br>  <br>
-  <br>  <br>
-  <br>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
 </div>
