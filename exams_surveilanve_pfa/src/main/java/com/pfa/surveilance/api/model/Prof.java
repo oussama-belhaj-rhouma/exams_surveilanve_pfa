@@ -33,7 +33,10 @@ public class Prof implements Serializable {
     @JsonIgnore
     private List<Affectation> affectations= new ArrayList<>();
 
-    @ManyToMany(mappedBy = "professors")
+    @ManyToMany
+    @JoinTable(name = "section_professeurs",
+            joinColumns = @JoinColumn(name = "professeur_id"),
+            inverseJoinColumns = @JoinColumn(name = "section_id"))
     private List<Section> sections= new ArrayList<>();
 
     @ManyToMany

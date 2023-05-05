@@ -37,9 +37,18 @@ export class LoginComponent implements OnInit{
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
+        if (this.roles.includes("ROLE_ADMIN")){
         this.routs.navigate(['/admin']).then(() => {
           window.location.reload();
-        })
+        })}else if (this.roles.includes("ROLE_PROF")){
+            this.routs.navigate(['/profile']).then(() => {
+              window.location.reload();
+            })
+        }else {
+          this.routs.navigate(['/etudiant']).then(() => {
+            window.location.reload();
+          })
+        }
         localStorage.setItem('token',this.storageService.getUser().accessToken);
 
       },

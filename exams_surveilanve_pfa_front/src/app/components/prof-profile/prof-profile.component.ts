@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Affectation } from 'src/app/models/Affectation';
 import { Prof } from 'src/app/models/Prof';
 import { ProfService } from 'src/app/services/prof/prof.service';
@@ -65,6 +66,18 @@ export class ProfProfileComponent implements OnInit {
     );
   }
 
+  public onUpdateProf(form: NgForm){
+    document.getElementById("update-form")?.click();
+    this.profService.updateProf(form.value).subscribe(
+      (      Response: any) =>{
+        this.getProf();
+        console.log(Response);
+  
+       },
+        (error : HttpErrorResponse) => {alert(error.message) ;
+    }
+   )
+ }
 
 
 }

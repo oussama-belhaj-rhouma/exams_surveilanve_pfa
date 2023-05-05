@@ -30,11 +30,8 @@ public class Section implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "matiere_id")
     )
     private List<Matiere> matieres= new ArrayList<>();
-    @ManyToMany
     @JsonIgnore
-    @JoinTable(name = "section_professeurs",
-            joinColumns = @JoinColumn(name = "section_id"),
-            inverseJoinColumns = @JoinColumn(name = "professeur_id"))
+    @ManyToMany(mappedBy = "sections")
     private List<Prof> professors= new ArrayList<>();
 
     @OneToMany(mappedBy = "section", cascade = CascadeType.ALL, orphanRemoval = true)

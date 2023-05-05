@@ -45,7 +45,6 @@ export class NavbarComponent {private roles: string[] = [];
     this.showAdminBoard = false;
     this.showProfessorBoard = false;
     this.showEtudiantBoard = false;
-
   }
 
 }

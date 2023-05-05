@@ -35,8 +35,21 @@ public class ProfController {
         List<Affectation> affectations = profService.getAffectationsByProfUsername(s);
         return ResponseEntity.ok().body(affectations);
     }
+    @PostMapping("/addMatiere/{profId}/{matiereId}")
+    public ResponseEntity<Prof> addMatiereToProfByID(@PathVariable("profId") Long profId,
+                                                                   @PathVariable("matiereId") Long matiereId) {
+        Prof a = profService.addMatiereToProf(profId,matiereId);
+        return new ResponseEntity<>(a, HttpStatus.CREATED);
+    }
 
+    @PostMapping("/addSection/{profId}/{sectionId}")
+    public ResponseEntity<Prof> addSectionToProfByID(@PathVariable("profId") Long profId,
+                                                                   @PathVariable("sectionId") Long sectionId) {
+        Prof a = profService.addSectionToProf(profId,sectionId);
+        return new ResponseEntity<>(a, HttpStatus.CREATED);
+    }
     @GetMapping("/find/{s}")
+
     public ResponseEntity<Prof> getProfByUsername( @PathVariable String s) {
         Prof prof = profService.findOneProf(s);
         return new ResponseEntity<>(prof, HttpStatus.OK);
@@ -55,9 +68,13 @@ public class ProfController {
         return new ResponseEntity<>(prof1, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    @Transactional
-    public void deleteProf(@PathVariable Long id) {
-        profService.deleteProf(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProfessor(@PathVariable Long id) {
+        try {
+            profService.removeProf(id);
+            return ResponseEntity.ok().body("Professor with id " + id + " was deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.pfa.surveilance.api.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class Affectation implements Serializable {
 
     private Long id;
     private String name;
-    private String day;
+    private LocalDate dayy;
     private String startTime;
     private String finishTime;
     private String code;
@@ -39,7 +40,7 @@ public class Affectation implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "professeur_id")
     )
     private List<Prof> professors= new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "calendrier_id")
     @JsonIgnore
     private Calendrier calendrier;

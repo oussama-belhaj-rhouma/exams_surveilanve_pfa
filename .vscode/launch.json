@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SurveilanceApplication<surveilance>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.pfa.surveilance.SurveilanceApplication",
+            "projectName": "surveilance",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

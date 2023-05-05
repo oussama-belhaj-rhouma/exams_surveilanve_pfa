@@ -1,16 +1,16 @@
 package com.pfa.surveilance.api.service;
 
 import com.pfa.surveilance.api.exception.UserNotFoundException;
-import com.pfa.surveilance.api.model.Affectation;
-import com.pfa.surveilance.api.model.Matiere;
-import com.pfa.surveilance.api.model.Prof;
-import com.pfa.surveilance.api.model.Salle;
+import com.pfa.surveilance.api.model.*;
+import com.pfa.surveilance.api.repo.MatiereRepo;
 import com.pfa.surveilance.api.repo.ProfRepo;
+import com.pfa.surveilance.api.repo.SectionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -19,12 +19,17 @@ import java.util.Optional;
 @Transactional
 
 public class ProfService {
+
     private final ProfRepo profRepo;
+    private final SectionRepo sectionRepo;
+    private final MatiereRepo matiereRepo;
 
 
     @Autowired
-    public ProfService(ProfRepo profRepo) {
+    public ProfService(ProfRepo profRepo,  SectionRepo sectionRepo, MatiereRepo matiereRepo) {
         this.profRepo = profRepo;
+        this.sectionRepo=sectionRepo;
+        this.matiereRepo=matiereRepo;
     }
 
     public Prof addProf(Prof p) {
@@ -64,7 +69,34 @@ public class ProfService {
         return profRepo.findProfByUsername(s).orElseThrow(() -> new UserNotFoundException("User by username " +username + " was not found"));
     }
 
-    public void deleteProf(Long id) {
-        profRepo.deleteProfById(id);
+    public Prof addSectionToProf(Long profId, Long sectionId) {
+        Prof prof = profRepo.findById(profId)
+                .orElseThrow(() -> new EntityNotFoundException("affectation not found with ID: " + profId));
+
+        Section section = sectionRepo.findById(sectionId)
+                .orElseThrow(() -> new EntityNotFoundException("Section not found with ID: " + sectionId));
+        prof.getSections().add(section);
+        return profRepo.save(prof);
+
+    }
+    public Prof addMatiereToProf(Long profId, Long matiereId) {
+        Prof prof = profRepo.findById(profId)
+                .orElseThrow(() -> new EntityNotFoundException("affectation not found with ID: " + profId));
+
+        Matiere matiere = matiereRepo.findById(matiereId)
+                .orElseThrow(() -> new EntityNotFoundException("Section not found with ID: " + matiereId));
+        prof.getMatieres().add(matiere);
+        return profRepo.save(prof);
+
+    }
+
+    @Transactional
+    public void removeProf(Long id) {
+        Prof prof = profRepo.findById(id).orElseThrow(() -> new RuntimeException("Prof not found with id " + id));
+        prof.getAffectations().clear();
+        prof.getMatieres().clear();
+        prof.getSections().clear();
+        profRepo.save(prof);
+        profRepo.delete(prof);
     }
 }

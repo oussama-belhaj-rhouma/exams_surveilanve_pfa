@@ -46,9 +46,7 @@ public class CalendrierService {
         Calendrier calendrier = calendrierRepo.findById(calendrierId)
                 .orElseThrow(() -> new EntityNotFoundException("Calendrier not found with ID: " + calendrierId));
 
-        if (calendrier.getAffectations().stream().anyMatch(a -> a.getId().equals(affectationId))) {
-            return calendrier;
-        }
+
         calendrier.getAffectations().add(affectation);
 
         Calendrier calendrier1 = calendrierRepo.save(calendrier);

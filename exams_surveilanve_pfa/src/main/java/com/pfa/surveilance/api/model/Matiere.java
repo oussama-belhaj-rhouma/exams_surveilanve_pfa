@@ -25,7 +25,6 @@ public class Matiere implements Serializable {
     @ManyToMany(mappedBy = "matieres")
     private List<Section> sections= new ArrayList<>();
     @JsonIgnore
-
     @ManyToMany(mappedBy = "matieres")
     private List<Prof> professors= new ArrayList<>();
 

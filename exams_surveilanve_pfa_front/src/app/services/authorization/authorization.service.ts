@@ -29,7 +29,7 @@ export class AuthorizationService {
   }
 
   register(username: string, email: string, password: string, role : string[]): Observable<any> {
-    
+
     return this.http.post(
       AUTH_API + 'signup',
       {
@@ -42,8 +42,9 @@ export class AuthorizationService {
     );
   }
   logout(){
-    localStorage.removeItem('token');
+    localStorage.removeItem('token')
     localStorage.removeItem('auth-user')
+
   }
 
 

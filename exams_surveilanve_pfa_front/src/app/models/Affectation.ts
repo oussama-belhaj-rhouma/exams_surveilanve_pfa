@@ -7,7 +7,7 @@ import { Salle } from './Salle';
 export interface Affectation {
   id: number;
   name: string;
-  day: string;
+  dayy: Date;
   startTime: string;
   finishTime: string;
   code: string;

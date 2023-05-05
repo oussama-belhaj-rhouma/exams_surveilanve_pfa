@@ -265,7 +265,7 @@
 .sauvbtn {
   font-size: 20px;
   color: #ffffff;
-  background: linear-gradient(to right, #46eda7, #21ae95);
+  background: linear-gradient(to right, #46c0ed, #207bbc);
   padding: 12px 35px;
   border: 1px solid rgba(255, 255, 255, 0);
   border-radius: 10px;
@@ -310,10 +310,12 @@
 
 .cardsContainer{
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  
-  margin-top: 80px;
+  overflow-x: scroll;
+  margin-top: 50px;
+  margin-bottom: 10px;
   gap: 40px;
+}
+.cardsContainer::-webkit-scrollbar {
+  display: none;
 }
