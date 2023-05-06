@@ -22,6 +22,7 @@ export class ProfTableComponent implements OnInit {
     this.service.getProfs().subscribe(
       (      Response: Prof[])=>{
         this.profs=Response;
+        console.log(this.profs)
       }, 
       (error : HttpErrorResponse)=>{
         if (error.error) {
