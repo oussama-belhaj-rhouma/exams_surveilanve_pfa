@@ -25,10 +25,9 @@ public class Affectation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-    private String name;
-    private LocalDate dayy;
-    private String startTime;
-    private String finishTime;
+    private String dayy;
+    private String Time;
+
     private String code;
     @ManyToOne
     @JoinColumn(name = "section_id")
