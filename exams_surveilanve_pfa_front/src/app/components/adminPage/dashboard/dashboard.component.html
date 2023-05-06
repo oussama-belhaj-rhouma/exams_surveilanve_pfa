@@ -97,66 +97,61 @@
 
   <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
   <!-- Content Row -->
+  <!-- Content Column -->
+  <div class="col-lg-6 mb-4">
+    <!-- Project Card Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+          Listes des Sections
+          <span class="add"><i class="fa-solid fa-plus"></i></span>
+        </h6>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
-    <!-- Content Column -->
-    <div class="col-lg-6 mb-4">
-      <!-- Project Card Example -->
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">
-            Listes des Sections
-            <span class="add"><i class="fa-solid fa-plus"></i></span>
-          </h6>
-        </div>
-      </div>
-
-      <div class="row" *ngFor="let section of sections">
-        <div class="col-lg-6 mb-4">
-          <div class="card bg-dark section text-white shadow">
-            <div class="card-body">
-              {{ section.sectionName }}
-              <div class="text-white-50 small">
-                <div class="divsection">
-                  <i class="fa-solid fa-pen update"></i>
-                  <i class="fa-sharp fa-solid fa-trash delete"></i>
-                </div>
-              </div>
+    <div class="col-4 mb-4" *ngFor="let section of sections">
+      <div class="card bg-dark section text-white shadow">
+        <div class="card-body">
+          {{ section.sectionName }}
+          <div class="text-white-50 small">
+            <div class="divsection">
+              <i class="fa-solid fa-pen update"></i>
+              <i class="fa-sharp fa-solid fa-trash delete"></i>
             </div>
           </div>
         </div>
-        
-        
-        <!-- Color System -->
       </div>
-      <div class="col-lg-6 mb-4">
-        <!-- Project Card Example -->
-        <div class="card shadow mb-4">
-          <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-              Listes des Matieres
-              <span class="add"><i class="fa-solid fa-plus"></i></span>
-            </h6>
-          </div>
-        </div>
+    </div>
 
-        <div class="row" *ngFor="let matiere of matieres">
-          <div class="col-lg-6 mb-4">
-            <div class="card bg-dark section text-white shadow">
-              <div class="card-body">
-                {{ matiere.name }}
-                <div class="text-white-50 small">
-                  <div class="divsection">
-                    <i class="fa-solid fa-pen update"></i>
-                    <i class="fa-sharp fa-solid fa-trash delete"></i>
-                  </div>
-                </div>
-              </div>
+    <!-- Color System -->
+  </div>
+  <div class="col-lg-6 mb-4">
+    <!-- Project Card Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+          Listes des Matieres
+          <span class="add"><i class="fa-solid fa-plus"></i></span>
+        </h6>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4 mb-4" *ngFor="let matiere of matieres">
+      <div class="card bg-dark section text-white shadow">
+        <div class="card-body">
+          {{ matiere.name }}
+          <div class="text-white-50 small">
+            <div class="divsection">
+              <i class="fa-solid fa-pen update"></i>
+              <i class="fa-sharp fa-solid fa-trash delete"></i>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </div>
-

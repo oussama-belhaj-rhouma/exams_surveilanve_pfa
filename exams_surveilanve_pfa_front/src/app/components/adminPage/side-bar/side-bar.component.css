@@ -65,3 +65,7 @@
 .saber {
   height: 660px;
 }
+
+.text-bg-dark {
+  background-color: rgb(38, 37, 40) !important;
+}
