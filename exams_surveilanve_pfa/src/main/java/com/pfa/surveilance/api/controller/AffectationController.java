@@ -5,6 +5,7 @@ import com.pfa.surveilance.api.model.Prof;
 import com.pfa.surveilance.api.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -32,33 +33,38 @@ public class AffectationController {
         this.salleService=salleService;
         this.sectionService=sectionService;
     }
-
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     public ResponseEntity<List<Affectation>> getAffectationss() {
         List<Affectation> affectations = affectationService.findAllAffectation();
         return new ResponseEntity<>(affectations, HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     public ResponseEntity<Affectation> getAffectationById(@PathVariable Long id) {
         Affectation affectation = affectationService.findOneAffectation(id);
         return new ResponseEntity<>(affectation, HttpStatus.OK);
     }
-
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
 
     public ResponseEntity<Affectation> addOneAffectation(@RequestBody Affectation affectation) {
         Affectation affectation1 = affectationService.addAffectation(affectation);
         return new ResponseEntity<>(affectation1, HttpStatus.CREATED);
     }
-
     @PutMapping("/update")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     public ResponseEntity<Affectation> updateAffectation(@RequestBody Affectation affectation) {
         Affectation affectation1 = affectationService.updateAffectation(affectation);
         return new ResponseEntity<>(affectation1, HttpStatus.OK);
     }
-
     @PostMapping("/addProf/{affectationId}/{professorId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     public ResponseEntity<Affectation> addProfessorToAffectationByID(@PathVariable("affectationId") Long affectationId,
                                                                      @PathVariable("professorId") Long professorId) {
         Affectation savedAffectation = affectationService.addProfToAffectation(affectationId, professorId);
@@ -71,6 +77,8 @@ public class AffectationController {
     }
 
     @PostMapping("/addMatiere/{affectationId}/{matiereId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     public ResponseEntity<Affectation> addMatiereToAffectationByID(@PathVariable("affectationId") Long affectationId,
                                                                      @PathVariable("matiereId") Long matiereId) {
         Affectation a = affectationService.addMatiereToAffectation(affectationId,matiereId);
@@ -78,6 +86,8 @@ public class AffectationController {
     }
 
     @PostMapping("/addSection/{affectationId}/{sectionId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     public ResponseEntity<Affectation> addSectionToAffectationByID(@PathVariable("affectationId") Long affectationId,
                                                                    @PathVariable("sectionId") Long sectionId) {
         Affectation a = affectationService.addSectionToAffectation(affectationId,sectionId);
@@ -85,12 +95,17 @@ public class AffectationController {
     }
 
     @PostMapping("/addSalle/{affectationId}/{salleId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     public ResponseEntity<Affectation> addSalleToAffectationByID(@PathVariable("affectationId") Long affectationId,
                                                                    @PathVariable("salleId") Long salleId) {
         Affectation a = affectationService.addSalleToAffectation(affectationId,salleId);
         return new ResponseEntity<>(a, HttpStatus.CREATED);
     }
+
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     @Transactional
     public void deleteAffectation(@PathVariable Long id) {
         affectationService.deleteAffectation(id);

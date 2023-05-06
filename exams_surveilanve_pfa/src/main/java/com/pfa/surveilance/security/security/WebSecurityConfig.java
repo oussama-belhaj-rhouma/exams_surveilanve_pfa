@@ -63,11 +63,14 @@ public class WebSecurityConfig {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/affectation/**").permitAll()
                 .antMatchers("/prof/**").permitAll()
                 .antMatchers("/etudiant/**").permitAll()
+                .antMatchers("/calendrier/**").permitAll()
                 .antMatchers("/matiere/**").permitAll()
-                .antMatchers("/section/**").permitAll()
                 .antMatchers("/salle/**").permitAll()
+                .antMatchers("/section/**").permitAll()
+                .antMatchers("/session/**").permitAll()
                 .anyRequest().authenticated();
         http.authenticationProvider(authenticationProvider());
 

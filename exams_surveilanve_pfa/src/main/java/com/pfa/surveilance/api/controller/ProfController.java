@@ -25,20 +25,23 @@ public class ProfController {
     public ProfController(ProfService profService) {
         this.profService = profService;
     }
-
-    @PreAuthorize("hasRole('ROLE_ADMIN') ")
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN') ")
+
     public ResponseEntity<List<Prof>> getProfs() {
         List<Prof> profs = profService.findAllProf();
         return new ResponseEntity<>(profs, HttpStatus.OK);
     }
     @GetMapping("/{s}/affectations")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_PROF') ")
+
     public ResponseEntity<List<Affectation>> getProfHistory(@PathVariable String s) {
         List<Affectation> affectations = profService.getAffectationsByProfUsername(s);
         return ResponseEntity.ok().body(affectations);
     }
-
     @PostMapping("/addMatiere/{profId}/{matiereId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     public ResponseEntity<Prof> addMatiereToProfByID(@PathVariable("profId") Long profId,
                                                                    @PathVariable("matiereId") Long matiereId) {
         Prof a = profService.addMatiereToProf(profId,matiereId);
@@ -46,33 +49,36 @@ public class ProfController {
     }
 
     @PostMapping("/addSection/{profId}/{sectionId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     public ResponseEntity<Prof> addSectionToProfByID(@PathVariable("profId") Long profId,
                                                                    @PathVariable("sectionId") Long sectionId) {
         Prof a = profService.addSectionToProf(profId,sectionId);
         return new ResponseEntity<>(a, HttpStatus.CREATED);
     }
     @GetMapping("/find/{s}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_PROF')")
 
     public ResponseEntity<Prof> getProfByUsername( @PathVariable String s) {
         Prof prof = profService.findOneProf(s);
         return new ResponseEntity<>(prof, HttpStatus.OK);
     }
-
     @PostMapping("/add")
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Prof> addOneProf(@RequestBody Prof prof) {
         Prof prof1 = profService.addProf(prof);
         return new ResponseEntity<>(prof1, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_PROF') ")
     @PutMapping("/update")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_PROF') ")
     public ResponseEntity<Prof> updateProf(@RequestBody Prof prof) {
         Prof prof1 = profService.updateProf(prof);
         return new ResponseEntity<>(prof1, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> deleteProfessor(@PathVariable Long id) {
         try {
             profService.removeProf(id);

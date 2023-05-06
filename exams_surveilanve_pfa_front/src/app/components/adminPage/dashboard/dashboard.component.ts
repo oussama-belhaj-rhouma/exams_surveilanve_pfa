@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Matiere } from 'src/app/models/Matiere';
 import { Section } from 'src/app/models/Section';
 import { MatiereService } from 'src/app/services/matiere/matiere.service';
+import { ProfService } from 'src/app/services/prof/prof.service';
 import { SectionService } from 'src/app/services/section/section.service';
 
 @Component({
@@ -13,7 +14,9 @@ import { SectionService } from 'src/app/services/section/section.service';
 export class DashboardComponent implements OnInit {
   constructor(
     private sectionService: SectionService,
-    private matiereService: MatiereService
+    private matiereService: MatiereService,
+    private profService: ProfService,
+
   ) {}
 
   public matieres!: Matiere[];
@@ -29,6 +32,8 @@ export class DashboardComponent implements OnInit {
     this.matiereService.getMatieres().subscribe(
       (Response: Matiere[]) => {
         this.matieres = Response;
+        console.log(this.matieres)
+
       },
       (error: HttpErrorResponse) => {
         if (error.error) {
@@ -49,6 +54,8 @@ export class DashboardComponent implements OnInit {
     this.sectionService.getSections().subscribe(
       (Response: Section[]) => {
         this.sections = Response;
+        console.log(this.sections)
+
       },
       (error: HttpErrorResponse) => {
         if (error.error) {
