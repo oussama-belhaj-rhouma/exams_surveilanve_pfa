@@ -14,6 +14,13 @@ import { AdminComponent } from './components/adminPage/admin/admin.component';
 import { EtudiantComponent } from './components/etudiantPage/etudiant/etudiant.component';
 import { ProfComponent } from './components/profPage/prof/prof.component';
 import { HistoryCardComponent } from './components/history-card/history-card.component';
+import { SideBarComponent } from './components/adminPage/side-bar/side-bar.component';
+import { DashboardComponent } from './components/adminPage/dashboard/dashboard.component';
+import { TablesComponent } from './components/adminPage/tables/tables.component';
+import { ProfTableComponent } from './components/adminPage/prof-table/prof-table.component';
+import { EtudianttableComponent } from './components/adminPage/etudianttable/etudianttable.component';
+import { AddprofComponent } from './components/adminPage/addprof/addprof.component';
+
 //import { HorizontalScrollMenuModule } from 'ngx-horizontal-scroll-menu';
 @NgModule({
   declarations: [
@@ -26,15 +33,15 @@ import { HistoryCardComponent } from './components/history-card/history-card.com
     AdminComponent,
     EtudiantComponent,
     ProfComponent,
-    HistoryCardComponent
+    HistoryCardComponent,
+    SideBarComponent,
+    DashboardComponent,
+    TablesComponent,
+    ProfTableComponent,
+    EtudianttableComponent,
+    AddprofComponent,
   ],
-  imports: [
-    FormsModule,
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [FormsModule, BrowserModule, AppRoutingModule, HttpClientModule],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

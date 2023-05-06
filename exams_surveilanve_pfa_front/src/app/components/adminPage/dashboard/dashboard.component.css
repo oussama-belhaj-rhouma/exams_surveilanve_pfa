@@ -1,0 +1,38 @@
+.section {
+  border: #4e73df solid 2px;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.update {
+  font-size: 20px;
+  color: rgb(18, 204, 18);
+}
+
+.delete {
+  font-size: 20px;
+  color: rgb(151, 21, 21);
+}
+
+.divsection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.update:hover,
+.delete:hover {
+  cursor: pointer;
+  transition: 5s;
+}
+
+.add {
+  position: relative;
+  left: 50%;
+  font-weight: bold;
+}
+
+.add:hover{
+    cursor: pointer;
+}

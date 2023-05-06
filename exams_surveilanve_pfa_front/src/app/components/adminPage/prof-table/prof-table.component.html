@@ -1,0 +1,38 @@
+<div class="card-header py-3">
+  <h6 class="m-0 font-weight-bold text-primary">Listes des profs:</h6>
+</div>
+<div class="card-body">
+  <div class="table-responsive">
+    <table
+      class="table table-bordered"
+      id="dataTable"
+      width="100%"
+      cellspacing="0"
+    >
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>nom</th>
+          <th>prenom</th>
+          <th>grade</th>
+          <th>email</th>
+          <th>action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let prof of profs">
+          <th scope="row">{{ prof.id }}</th>
+          <td>{{ prof.nom }}</td>
+          <td>{{ prof.prenom }}</td>
+          <td>{{ prof.grade }}</td>
+          <td>{{ prof.email }}</td>
+          <td style="text-align: center;">
+            <button type="button" class="btn btn-primary" style="margin-right: 20px;">modifier</button> 
+            <button type="button" class="btn btn-danger" >suprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4"></div>
+
+  <!-- Content Row -->
+  <div class="row">
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+              >
+                Professors
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">100</div>
+            </div>
+            <div class="col-auto">
+              <i class="fa-solid fa-user-tie" style="font-size: 50px"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="text-xs font-weight-bold text-success text-uppercase mb-1"
+              >
+                Etudiants
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">1000</div>
+            </div>
+            <div class="col-auto">
+              <i class="fa-solid fa-user" style="font-size: 50px"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-info shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="text-xs font-weight-bold text-info text-uppercase mb-1"
+              >
+                Matieres
+              </div>
+              <div class="row no-gutters align-items-center">
+                <div class="col-auto">
+                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                    30
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fa-solid fa-book" style="font-size: 50px"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="text-xs font-weight-bold text-warning text-uppercase mb-1"
+              >
+                Admins
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+            </div>
+            <div class="col-auto">
+              <i class="fa-solid fa-user-lock" style="font-size: 50px"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+  <!-- Content Row -->
+  <div class="row">
+    <!-- Content Column -->
+    <div class="col-lg-6 mb-4">
+      <!-- Project Card Example -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">
+            Listes des Sections
+            <span class="add"><i class="fa-solid fa-plus"></i></span>
+          </h6>
+        </div>
+      </div>
+
+      <div class="row" *ngFor="let section of sections">
+        <div class="col-lg-6 mb-4">
+          <div class="card bg-dark section text-white shadow">
+            <div class="card-body">
+              {{ section.sectionName }}
+              <div class="text-white-50 small">
+                <div class="divsection">
+                  <i class="fa-solid fa-pen update"></i>
+                  <i class="fa-sharp fa-solid fa-trash delete"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    
+
+        
+
+        <!-- Color System -->
+      </div>
+      <div class="col-lg-6 mb-4">
+        <!-- Project Card Example -->
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+              Listes des Matieres
+              <span class="add"><i class="fa-solid fa-plus"></i></span>
+            </h6>
+          </div>
+        </div>
+
+        <!-- <div class="row" *ngFor="let matiere of matieres">
+          <div class="col-lg-6 mb-4">
+            <div class="card bg-dark section text-white shadow">
+              <div class="card-body">
+                {{ matiere.name }}
+                <div class="text-white-50 small">
+                  <div class="divsection">
+                    <i class="fa-solid fa-pen update"></i>
+                    <i class="fa-sharp fa-solid fa-trash delete"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+      </div>
+    </div>
+  </div>
+</div>
+

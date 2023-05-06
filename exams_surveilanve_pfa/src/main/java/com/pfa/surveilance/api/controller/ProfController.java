@@ -7,6 +7,7 @@ import com.pfa.surveilance.api.service.AffectationService;
 import com.pfa.surveilance.api.service.ProfService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ public class ProfController {
         this.profService = profService;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') ")
     @GetMapping("/all")
     public ResponseEntity<List<Prof>> getProfs() {
         List<Prof> profs = profService.findAllProf();
@@ -35,6 +37,7 @@ public class ProfController {
         List<Affectation> affectations = profService.getAffectationsByProfUsername(s);
         return ResponseEntity.ok().body(affectations);
     }
+
     @PostMapping("/addMatiere/{profId}/{matiereId}")
     public ResponseEntity<Prof> addMatiereToProfByID(@PathVariable("profId") Long profId,
                                                                    @PathVariable("matiereId") Long matiereId) {
@@ -62,6 +65,7 @@ public class ProfController {
         return new ResponseEntity<>(prof1, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_PROF') ")
     @PutMapping("/update")
     public ResponseEntity<Prof> updateProf(@RequestBody Prof prof) {
         Prof prof1 = profService.updateProf(prof);
