@@ -20,6 +20,7 @@ import { TablesComponent } from './components/adminPage/tables/tables.component'
 import { ProfTableComponent } from './components/adminPage/prof-table/prof-table.component';
 import { EtudianttableComponent } from './components/adminPage/etudianttable/etudianttable.component';
 import { AddprofComponent } from './components/adminPage/addprof/addprof.component';
+import { httpInterceptorProviders } from './interceptor/intex';
 
 //import { HorizontalScrollMenuModule } from 'ngx-horizontal-scroll-menu';
 @NgModule({
@@ -42,6 +43,7 @@ import { AddprofComponent } from './components/adminPage/addprof/addprof.compone
     AddprofComponent,
   ],
   imports: [FormsModule, BrowserModule, AppRoutingModule, HttpClientModule],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
