@@ -33,9 +33,7 @@ export class SectionService {
     });
   }
 
-  public deleteSection(id: number): Observable<void> {
-    return this.http.delete<void>(`http://localhost:8080/section/delete/${id}`, {
-      withCredentials: true,
-    });
-  }
+  public deleteSection( id : number): Observable<void> {
+    return this.http.delete<void>(`http://localhost:8080/section/delete/${id}`, { withCredentials: true });
+}
 }

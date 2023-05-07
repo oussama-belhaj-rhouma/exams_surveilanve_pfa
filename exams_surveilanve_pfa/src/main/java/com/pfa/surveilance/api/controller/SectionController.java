@@ -48,13 +48,9 @@ public class SectionController {
     }
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<String> deleteSection(@PathVariable Long id) {
-        try {
+    public void deleteSection(@PathVariable Long id) {
             sectionService.removeSection(id);
-            return ResponseEntity.ok().body("Section with id " + id + " was deleted successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
+
     }
 
 
