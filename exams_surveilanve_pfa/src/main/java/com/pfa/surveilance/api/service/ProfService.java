@@ -2,6 +2,7 @@ package com.pfa.surveilance.api.service;
 
 import com.pfa.surveilance.api.exception.UserNotFoundException;
 import com.pfa.surveilance.api.model.*;
+import com.pfa.surveilance.api.repo.AffectationRepo;
 import com.pfa.surveilance.api.repo.MatiereRepo;
 import com.pfa.surveilance.api.repo.ProfRepo;
 import com.pfa.surveilance.api.repo.SectionRepo;
@@ -23,12 +24,15 @@ public class ProfService {
     private final ProfRepo profRepo;
     private final SectionRepo sectionRepo;
     private final MatiereRepo matiereRepo;
+    private final AffectationRepo affectationRepo;
+
 
 
     @Autowired
-    public ProfService(ProfRepo profRepo,  SectionRepo sectionRepo, MatiereRepo matiereRepo) {
+    public ProfService(ProfRepo profRepo,  SectionRepo sectionRepo, MatiereRepo matiereRepo, AffectationRepo affectationRepo) {
         this.profRepo = profRepo;
         this.sectionRepo=sectionRepo;
+        this.affectationRepo=affectationRepo;
         this.matiereRepo=matiereRepo;
     }
 
@@ -95,17 +99,18 @@ public class ProfService {
         Prof professor = profRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Professor not found with id " + id));
 
-        // Remove the professor from any related sections
         List<Section> sections = professor.getSections();
         sections.forEach(section -> section.getProfessors().remove(professor));
         sectionRepo.saveAll(sections);
 
-        // Remove the professor from any related matieres
         List<Matiere> matieres = professor.getMatieres();
         matieres.forEach(matiere -> matiere.getProfessors().remove(professor));
         matiereRepo.saveAll(matieres);
 
-        // Delete the professor entity
+        List<Affectation> affectations = professor.getAffectations();
+        affectations.forEach(affectation -> affectation.getProfessors().remove(professor));
+        affectationRepo.saveAll(affectations);
+
         profRepo.deleteById(id);
     }
 }

@@ -34,7 +34,7 @@ public class AffectationController {
         this.sectionService=sectionService;
     }
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_ETUDIANT') or hasRole('ROLE_PROF')")
 
     public ResponseEntity<List<Affectation>> getAffectationss() {
         List<Affectation> affectations = affectationService.findAllAffectation();
@@ -49,7 +49,7 @@ public class AffectationController {
         return new ResponseEntity<>(affectation, HttpStatus.OK);
     }
     @PostMapping("/add")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') ")
 
     public ResponseEntity<Affectation> addOneAffectation(@RequestBody Affectation affectation) {
         Affectation affectation1 = affectationService.addAffectation(affectation);
