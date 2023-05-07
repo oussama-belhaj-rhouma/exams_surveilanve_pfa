@@ -58,15 +58,10 @@ public class EtudiantService {
 
     @Transactional
     public void deleteEtudiant(Long id) {
-        Etudiant e = etudiantRepo.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Section not found with id " + id));
-
-        List<Section> section = (List<Section>) e.getSection();
-        section.remove(e);
-        sectionRepo.saveAll(section);
-
-
-        etudiantRepo.deleteById(id);
+        Etudiant etudiant = etudiantRepo.findById(id).orElseThrow(() -> new RuntimeException("Etudiant not found with id " + id));
+        etudiant.setSection(null);
+        etudiantRepo.save(etudiant);
+        etudiantRepo.delete(etudiant);
     }
 
     public Etudiant addSectionToEtudiant(Long etudiantId, Long sectionId) {
