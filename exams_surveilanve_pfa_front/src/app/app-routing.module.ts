@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfComponent } from './components/profPage/prof/prof.component';
 import { EtudiantComponent } from './components/etudiantPage/etudiant/etudiant.component';
 import { AdminComponent } from './components/adminPage/admin/admin.component';
+import { TestComponent } from './components/test/test.component';
 
 
 
@@ -20,8 +21,8 @@ const routes: Routes = [
   { path: 'prof', component: ProfComponent },
 
   { path: 'profile', component: ProfProfileComponent },
-  { path: 'register', component: RegisterComponent }
-
+  { path: 'register', component: RegisterComponent },
+  { path: 'calendrier', component: TestComponent }
 
 
 ];

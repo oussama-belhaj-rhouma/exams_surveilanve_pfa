@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Affectation } from 'src/app/models/Affectation';
 import { AffectationService } from 'src/app/services/affectation/affectation.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-test',
@@ -9,7 +10,11 @@ import { AffectationService } from 'src/app/services/affectation/affectation.ser
   styleUrls: ['./test.component.css'],
 })
 export class TestComponent implements OnInit {
-  constructor(private service: AffectationService) {}
+  constructor(
+    private service: AffectationService,
+    private storageService: StorageService
+  ) {}
+  currentUser: any;
   jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
   affectations!: Affectation[];
   content?: string;
@@ -22,8 +27,21 @@ export class TestComponent implements OnInit {
     this.service.getAffectations().subscribe(
       (Response: Affectation[]) => {
         this.affectations = Response;
-        console.log(this.affectations);
-        this.test();
+        // console.log(this.affectations);
+        switch (this.storageService.getUser().roles[0]) {
+          case 'ROLE_ADMIN':
+            this.testall();
+            break;
+          case 'ROLE_PROF':
+            this.testprof();
+            break;
+          case 'ROLE_ETUDIANT':
+            console.log('Option 3 selected');
+            break;
+          default:
+            console.log('Invalid ROLE');
+            break;
+        }
       },
       (error: HttpErrorResponse) => {
         if (error.error) {
@@ -40,19 +58,40 @@ export class TestComponent implements OnInit {
     );
   }
 
-  public test() {
+  public update_case(a: HTMLElement | null, i: number) {
+    a!.removeAttribute('disabled');
+    a!.classList.remove('btn-secondary');
+    a!.classList.add('btn-success');
+    a!.textContent =
+      this.affectations[i].matiere.name +
+      '\n' +
+      this.affectations[i].section.sectionName;
+  }
+
+  public testall() {
     for (let i = 0; i < this.affectations.length; i++) {
-      console.log(this.affectations[i].dayy + this.affectations[i].time);
+      // console.log(this.affectations[i].dayy + this.affectations[i].time);
       let a = document.getElementById(
         this.affectations[i].dayy + this.affectations[i].time
       );
-      a!.removeAttribute('disabled');
-      a!.classList.remove('btn-secondary');
-      a!.classList.add('btn-success');
-      a!.textContent =
-        this.affectations[0].matiere.name +
-        '\n' +
-        this.affectations[0].section.sectionName;
+      this.update_case(a, i);
+    }
+  }
+
+  public testprof() {
+    for (let i = 0; i < this.affectations.length; i++) {
+      for (let j = 0; j < this.affectations[i].professors.length; j++) {
+        this.currentUser = this.storageService.getUser();
+        if (
+          this.affectations[i].professors[j].username ==
+          this.currentUser.username
+        ) {
+          let a = document.getElementById(
+            this.affectations[i].dayy + this.affectations[i].time
+          );
+          this.update_case(a,i);
+        }
+      }
     }
   }
 }

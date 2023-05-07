@@ -41,11 +41,11 @@ export class LoginComponent implements OnInit{
         this.routs.navigate(['/admin']).then(() => {
           window.location.reload();
         })}else if (this.roles.includes("ROLE_PROF")){
-            this.routs.navigate(['/profile']).then(() => {
+            this.routs.navigate(['/calendrier']).then(() => {
               window.location.reload();
             })
         }else {
-          this.routs.navigate(['/etudiant']).then(() => {
+          this.routs.navigate(['/calendrier']).then(() => {
             window.location.reload();
           })
         }

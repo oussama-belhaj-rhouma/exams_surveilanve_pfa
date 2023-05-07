@@ -7,8 +7,12 @@
 
     <nav class="items">
       <a routerLinkActive="active" class="navBarItem" *ngIf="showAdminBoard" href="/admin" > Dashbord </a>
+      <a routerLinkActive="active" class="navBarItem" *ngIf="showAdminBoard" href="/calendrier" > Calendrier </a>
+
+      <a routerLinkActive="active" class="navBarItem" *ngIf="showProfessorBoard" href="/calendrier"> Calendrier </a>
       <a routerLinkActive="active" class="navBarItem" *ngIf="showProfessorBoard" href="/profile"> Prof profile </a>
-      <a routerLinkActive="active" class="navBarItem" *ngIf="showEtudiantBoard" href="/etudaint"> Etudiant calendriers </a>
+      
+      <a routerLinkActive="active" class="navBarItem" *ngIf="showEtudiantBoard" href="/calendrier"> Calendriers </a>
       <a routerLinkActive="active" class="navBarItem" *ngIf="showEtudiantBoard" href="/etudiant"> Etudiant profile </a>
 
 
