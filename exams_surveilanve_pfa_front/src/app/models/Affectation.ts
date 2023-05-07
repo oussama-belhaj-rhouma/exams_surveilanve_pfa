@@ -6,14 +6,12 @@ import { Salle } from './Salle';
 
 export interface Affectation {
   id: number;
-  name: string;
-  dayy: Date;
-  startTime: string;
-  finishTime: string;
+  dayy: string;
   code: string;
   section: Section;
   professors: Prof[];
   calendrier: Calendrier;
   matiere: Matiere;
   salle: Salle;
+  time: string;
 }
