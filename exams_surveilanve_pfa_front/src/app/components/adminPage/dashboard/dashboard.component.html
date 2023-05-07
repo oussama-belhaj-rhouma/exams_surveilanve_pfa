@@ -134,7 +134,7 @@
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">
           Listes des Matieres
-          <span class="add"><i class="fa-solid fa-plus"></i></span>
+          <span class="add"><i role="button" (click)="onOpenModal(null,'add')" class="fa-solid fa-plus"></i></span>
         </h6>
       </div>
     </div>
@@ -199,7 +199,7 @@
            <form #editForm="ngForm" (ngSubmit)="onUpdateSection(editForm)">
             <input type="hidden" ngModel="{{editSection?.id}}" name="id" class="form-control" id="id" >
             <input type="hidden" ngModel="{{editSection?.matieres}}" name="matieres" class="form-control" id="matieres" >
-
+            
             <div class="form-group">
               <label for="name">Name</label>
               <input type="text" ngModel name="sectionName" class="form-control" id="sectionName" placeholder="Secton name" required>
@@ -230,10 +230,93 @@
         <div class="modal-body">
            <p>Are you sure you want to delete the Section ?</p>
            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button type="button" class="btn btn-secondary" >No</button>
               <button (click)="onDeleteSection(deleteSection?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+            </div>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+
+<!--
+
+<div class="modal fade" id="addMatiereModal"  tabindex="-1" role="dialog" aria-labelledby="addMatiereModalLabel" aria-hidden="true"> 
+  <div class="modal-dialog" role="document">
+ <div class="modal-content">
+     <div class="modal-header">
+        <h5 class="modal-title" id="addMatiereModalLabel">Add Matiere</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+     </div>
+     <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddMatiere(addForm)">
+        <div class="form-group">
+           <label for="name">Name</label>
+           <input type="text" ngModel name="name" class="form-control" id="name" placeholder="name" required>
+        </div>
+        <div class="modal-footer">
+           <button type="button" id="add-Matiere-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <button type="submit" [disabled]="addForm.invalid" class="btn btn-primary" >Save changes</button>
+        </div>
+        </form>
+     </div>
+  </div>
+</div>
+</div>
+
+Edit Modal 
+<div class="modal fade" id="updateMatiereModal" tabindex="-1" role="dialog" aria-labelledby="MatiereEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="updateMatiereModalLabel">Edit Matiere {{editMatiere?.MatiereName}}</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #editForm="ngForm" (ngSubmit)="onUpdateMatiere(editForm)">
+            <input type="hidden" ngModel="{{editMatiere?.id}}" name="id" class="form-control" id="id" >
+            <input type="hidden" ngModel="{{editMatiere?.matieres}}" name="matieres" class="form-control" id="matieres" >
+
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" ngModel name="MatiereName" class="form-control" id="MatiereName" placeholder="Secton name" required>
+           </div>
+              <div class="modal-footer">
+                <div class="modal-footer">
+                  <button type="button" id="update-Matiere-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" [disabled]="editForm.invalid" class="btn btn-primary" >Save changes</button>
+               </div>
+             </div>
+          </form>
+       </div>
+    </div>
+ </div>
+</div>
+
+Delete Modal
+
+<div class="modal fade" id="deleteMatiereModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="deleteModelLabel">Delete Matiere</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <p>Are you sure you want to delete the Matiere ?</p>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button (click)="onDeleteMatiere(deleteMatiere?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
            </div>
         </div>
      </div>
   </div>
 </div>
+-->
