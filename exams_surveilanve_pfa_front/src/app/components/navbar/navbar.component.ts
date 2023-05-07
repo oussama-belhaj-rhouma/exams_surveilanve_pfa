@@ -6,9 +6,10 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent {private roles: string[] = [];
+export class NavbarComponent {
+  private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
   showProfessorBoard = false;
@@ -20,7 +21,7 @@ export class NavbarComponent {private roles: string[] = [];
 
   constructor(
     private storageService: StorageService,
-    private authService: AuthorizationService,
+    private authService: AuthorizationService
   ) {}
 
   ngOnInit(): void {
@@ -34,10 +35,8 @@ export class NavbarComponent {private roles: string[] = [];
       this.showProfessorBoard = this.roles.includes('ROLE_PROF');
       this.showEtudiantBoard = this.roles.includes('ROLE_ETUDIANT');
 
-
       this.username = user.username;
     }
-
   }
   logout(): void {
     this.authService.logout();
@@ -46,5 +45,4 @@ export class NavbarComponent {private roles: string[] = [];
     this.showProfessorBoard = false;
     this.showEtudiantBoard = false;
   }
-
 }

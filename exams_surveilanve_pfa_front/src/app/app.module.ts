@@ -22,6 +22,7 @@ import { EtudianttableComponent } from './components/adminPage/etudianttable/etu
 import { AddprofComponent } from './components/adminPage/addprof/addprof.component';
 import { httpInterceptorProviders } from './interceptor/intex';
 import { TestComponent } from './components/test/test.component';
+import { RedirectComponent } from './redirect/redirect.component';
 
 //import { HorizontalScrollMenuModule } from 'ngx-horizontal-scroll-menu';
 @NgModule({
@@ -43,6 +44,7 @@ import { TestComponent } from './components/test/test.component';
     EtudianttableComponent,
     AddprofComponent,
     TestComponent,
+    RedirectComponent,
   ],
   imports: [FormsModule, BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [httpInterceptorProviders],
