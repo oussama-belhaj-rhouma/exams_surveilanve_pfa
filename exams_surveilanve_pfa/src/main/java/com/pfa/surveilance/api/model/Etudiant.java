@@ -22,6 +22,6 @@ public class Etudiant implements Serializable{
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "sectionion_id")
+    @JoinColumn(name = "section_id")
     private Section section;
 }

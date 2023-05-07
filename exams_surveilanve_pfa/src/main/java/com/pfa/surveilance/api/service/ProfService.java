@@ -92,11 +92,20 @@ public class ProfService {
 
     @Transactional
     public void removeProf(Long id) {
-        Prof prof = profRepo.findById(id).orElseThrow(() -> new RuntimeException("Prof not found with id " + id));
-        prof.getAffectations().clear();
-        prof.getMatieres().clear();
-        prof.getSections().clear();
-        profRepo.save(prof);
-        profRepo.delete(prof);
+        Prof professor = profRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Professor not found with id " + id));
+
+        // Remove the professor from any related sections
+        List<Section> sections = professor.getSections();
+        sections.forEach(section -> section.getProfessors().remove(professor));
+        sectionRepo.saveAll(sections);
+
+        // Remove the professor from any related matieres
+        List<Matiere> matieres = professor.getMatieres();
+        matieres.forEach(matiere -> matiere.getProfessors().remove(professor));
+        matiereRepo.saveAll(matieres);
+
+        // Delete the professor entity
+        profRepo.deleteById(id);
     }
 }

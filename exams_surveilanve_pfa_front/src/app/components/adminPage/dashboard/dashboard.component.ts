@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Matiere } from 'src/app/models/Matiere';
 import { Section } from 'src/app/models/Section';
 import { MatiereService } from 'src/app/services/matiere/matiere.service';
@@ -18,7 +19,8 @@ export class DashboardComponent implements OnInit {
     private profService: ProfService,
 
   ) {}
-
+  public editSection!: Section |null ;
+  public deleteSection!: Section | null;
   public matieres!: Matiere[];
   public sections!: Section[];
   content?: string;
@@ -71,4 +73,63 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
+  public onOpenModal(section: Section | null , mode: string): void {
+    const container = document.getElementById('main-container') ;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'add') {
+      button.setAttribute('data-target', '#addSectionModal');
+    }
+    if (mode === 'edit') {
+      this.editSection=section;
+      button.setAttribute('data-target', '#updateSectionModal');
+    }
+    if (mode === 'delete') {
+      this.deleteSection=section;
+      button.setAttribute('data-target', '#deleteSectionModal');
+    }
+    container?.appendChild(button);
+    button.click();
+  }
+  
+  public onAddSection(form: NgForm){
+     document.getElementById("add-Section-form")?.click();
+     this.sectionService.addSection(form.value).subscribe(
+       (      Response: any) =>{
+         this.getsections();
+         console.log(Response);
+         form.reset();
+        },
+         (error : HttpErrorResponse) => {alert(error.message) ;
+           form.reset(); }
+    )
+  }
+
+  public onUpdateSection(form: NgForm){
+    document.getElementById("update-Section-form")?.click();
+    this.sectionService.updateSection(form.value).subscribe(
+      (      Response: any) =>{
+        this.getsections();
+        console.log(Response);
+        form.reset();
+       },
+        (error : HttpErrorResponse) => {alert(error.message) ;
+          form.reset(); }
+   )
+ }
+
+ public onDeleteSection( SectionId: any){
+  this.sectionService.deleteSection(SectionId).subscribe(
+    (Response: any) =>{
+    console.log(Response);
+    this.getsections();
+   },
+     (error : HttpErrorResponse) => {alert(error.message)}
+ )
+}
+
+
 }

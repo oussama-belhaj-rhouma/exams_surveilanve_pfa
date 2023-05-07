@@ -98,13 +98,14 @@
   <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
   <!-- Content Row -->
   <!-- Content Column -->
-  <div class="col-lg-6 mb-4">
+  <div id="main-container">
+  <div class="col-lg-6 mb-4" >
     <!-- Project Card Example -->
     <div class="card shadow mb-4">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">
           Listes des Sections
-          <span class="add"><i class="fa-solid fa-plus"></i></span>
+          <span class="add"><i role="button" (click)="onOpenModal(null,'add')" class="fa-solid fa-plus"></i></span>
         </h6>
       </div>
     </div>
@@ -117,8 +118,8 @@
           {{ section.sectionName }}
           <div class="text-white-50 small">
             <div class="divsection">
-              <i class="fa-solid fa-pen update"></i>
-              <i class="fa-sharp fa-solid fa-trash delete"></i>
+              <i class="fa-solid fa-pen update" (click)="onOpenModal(section,'edit')" data-placement="top" data-toggle="tooltip" data-original-title="Edit"></i>
+              <i class="fa-sharp fa-solid fa-trash delete" (click)="onOpenModal(section,'delete')" data-placement="top" data-toggle="tooltip" data-original-title="Delete" ></i>
             </div>
           </div>
         </div>
@@ -153,5 +154,86 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+</div>
+
+
+<!-- Add Modal -->
+<div class="modal fade" id="addSectionModal"  tabindex="-1" role="dialog" aria-labelledby="addSectionModalLabel" aria-hidden="true"> 
+  <div class="modal-dialog" role="document">
+ <div class="modal-content">
+     <div class="modal-header">
+        <h5 class="modal-title" id="addSectionModalLabel">Add Section</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+     </div>
+     <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddSection(addForm)">
+        <div class="form-group">
+           <label for="name">Name</label>
+           <input type="text" ngModel name="sectionName" class="form-control" id="name" placeholder="Secton name" required>
+        </div>
+        <div class="modal-footer">
+           <button type="button" id="add-Section-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <button type="submit" [disabled]="addForm.invalid" class="btn btn-primary" >Save changes</button>
+        </div>
+        </form>
+     </div>
+  </div>
+</div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="updateSectionModal" tabindex="-1" role="dialog" aria-labelledby="SectionEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="updateSectionModalLabel">Edit Section {{editSection?.sectionName}}</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #editForm="ngForm" (ngSubmit)="onUpdateSection(editForm)">
+            <input type="hidden" ngModel="{{editSection?.id}}" name="id" class="form-control" id="id" >
+            <input type="hidden" ngModel="{{editSection?.matieres}}" name="matieres" class="form-control" id="matieres" >
+
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" ngModel name="sectionName" class="form-control" id="sectionName" placeholder="Secton name" required>
+           </div>
+              <div class="modal-footer">
+                <div class="modal-footer">
+                  <button type="button" id="update-Section-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" [disabled]="editForm.invalid" class="btn btn-primary" >Save changes</button>
+               </div>
+             </div>
+          </form>
+       </div>
+    </div>
+ </div>
+</div>
+
+<!--Delete Modal-->
+
+<div class="modal fade" id="deleteSectionModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="deleteModelLabel">Delete Section</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <p>Are you sure you want to delete the Section ?</p>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button (click)="onDeleteSection(deleteSection?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+           </div>
+        </div>
+     </div>
   </div>
 </div>
