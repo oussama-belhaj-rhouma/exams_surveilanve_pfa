@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Getter
@@ -39,7 +41,7 @@ public class Prof implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "section_id"))
     private List<Section> sections= new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.DETACH)
     @JoinTable(name = "professeur_matiere",
             joinColumns = @JoinColumn(name = "professeur_id"),
             inverseJoinColumns = @JoinColumn(name = "matiere_id"))

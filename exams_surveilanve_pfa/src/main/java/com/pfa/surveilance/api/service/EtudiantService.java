@@ -56,8 +56,12 @@ public class EtudiantService {
         return etudiantRepo.findEtudiantByUsername(s).orElseThrow(() -> new UserNotFoundException("User by username " +username+  " was not found"));
     }
 
+    @Transactional
     public void deleteEtudiant(Long id) {
-        etudiantRepo.deleteEtudiantById(id);
+        Etudiant etudiant = etudiantRepo.findById(id).orElseThrow(() -> new RuntimeException("Etudiant not found with id " + id));
+        etudiant.setSection(null);
+        etudiantRepo.save(etudiant);
+        etudiantRepo.delete(etudiant);
     }
 
     public Etudiant addSectionToEtudiant(Long etudiantId, Long sectionId) {

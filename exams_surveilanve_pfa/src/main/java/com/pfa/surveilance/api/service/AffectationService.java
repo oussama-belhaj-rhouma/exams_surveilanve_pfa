@@ -110,6 +110,15 @@ public class AffectationService {
 
 
     public void deleteAffectation(Long id){
-        affectationRepo.deleteAffectaionById(id);
+
+        Affectation affectation = affectationRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Affectation not found with id " + id));
+        affectation.getProfessors().clear();
+        affectation.setCalendrier(null);
+        affectation.setMatiere(null);
+        affectation.setSection(null);
+        affectation.setSalle(null);
+        affectationRepo.save(affectation);
+        affectationRepo.delete(affectation);
     }
 }

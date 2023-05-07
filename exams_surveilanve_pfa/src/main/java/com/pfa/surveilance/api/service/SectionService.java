@@ -37,7 +37,13 @@ public class SectionService {
     }    public Section findOneSection(Long id){
         return sectionRepo.findSectionById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
     }
-    public void deleteSection(Long id){
-        sectionRepo.deleteSectionById(id);
+    @Transactional
+    public void removeSection(Long id) {
+        Section section = sectionRepo.findById(id).orElseThrow(() -> new RuntimeException("Section not found with id " + id));
+        section.getMatieres().clear();
+        section.getProfessors().clear();
+        section.getCalendriers().clear();
+        sectionRepo.save(section);
+        sectionRepo.delete(section);
     }
 }

@@ -8,6 +8,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 //import
 
 @Entity
@@ -31,12 +33,12 @@ public class Section implements Serializable {
     )
     private List<Matiere> matieres= new ArrayList<>();
     @JsonIgnore
-    @ManyToMany(mappedBy = "sections")
+    @ManyToMany( mappedBy = "sections")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Prof> professors= new ArrayList<>();
 
     @OneToMany(mappedBy = "section", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Calendrier> calendriers = new ArrayList<>();
-
 
 }

@@ -77,7 +77,7 @@ public class ProfController {
         return new ResponseEntity<>(prof1, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> deleteProfessor(@PathVariable Long id) {
         try {

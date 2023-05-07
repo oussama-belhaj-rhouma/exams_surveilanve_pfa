@@ -48,10 +48,9 @@ public class SectionController {
     }
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-
-    @Transactional
     public void deleteSection(@PathVariable Long id) {
-        sectionService.deleteSection(id);
+            sectionService.removeSection(id);
+
     }
 
 
