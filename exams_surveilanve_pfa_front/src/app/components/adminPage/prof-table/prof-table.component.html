@@ -11,25 +11,42 @@
     >
       <thead>
         <tr>
-          <th>#</th>
           <th>nom</th>
           <th>prenom</th>
           <th>grade</th>
           <th>email</th>
+          <th>section</th>
+          <th>matiere</th>
           <th>action</th>
         </tr>
       </thead>
 
       <tbody>
         <tr *ngFor="let prof of profs">
-          <th scope="row">{{ prof.id }}</th>
           <td>{{ prof.nom }}</td>
           <td>{{ prof.prenom }}</td>
           <td>{{ prof.grade }}</td>
           <td>{{ prof.email }}</td>
-          <td style="text-align: center;">
-            <button type="button" class="btn btn-primary" style="margin-right: 20px;">modifier</button> 
-            <button type="button" class="btn btn-danger" >suprimer</button>
+          <td>{{ prof.sections ? prof.sections[0].sectionName : "-" }}</td>
+          <td>{{ prof.matieres }}</td>
+
+          <td style="text-align: center">
+            <a routerLinkActive="active" href="/updateprof/{{ prof.username }}"
+              ><button
+                type="button"
+                class="btn btn-primary"
+                style="margin-right: 20px"
+              >
+                modifier
+              </button>
+            </a>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="onDeleteProf(prof.id)"
+            >
+              supprimer
+            </button>
           </td>
         </tr>
       </tbody>

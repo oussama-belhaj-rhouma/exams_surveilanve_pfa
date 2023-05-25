@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { EGrade } from 'src/app/models/EGrade';
-import { Prof } from 'src/app/models/Prof';
-import { ProfService } from 'src/app/services/prof/prof.service';
-import { Section } from 'src/app/models/Section';
-import { SectionService } from 'src/app/services/section/section.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatiereService } from 'src/app/services/matiere/matiere.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EGrade } from 'src/app/models/EGrade';
 import { Matiere } from 'src/app/models/Matiere';
+import { Prof } from 'src/app/models/Prof';
+import { Section } from 'src/app/models/Section';
+import { MatiereService } from 'src/app/services/matiere/matiere.service';
+import { ProfService } from 'src/app/services/prof/prof.service';
+import { SectionService } from 'src/app/services/section/section.service';
 
 @Component({
-  selector: 'app-addprof',
-  templateUrl: './addprof.component.html',
-  styleUrls: ['./addprof.component.css'],
+  selector: 'app-updateprof',
+  templateUrl: './updateprof.component.html',
+  styleUrls: ['./updateprof.component.css'],
 })
-export class AddprofComponent implements OnInit {
-  public sections!: Section[];
+export class UpdateprofComponent implements OnInit {
+  s!: string;
   public matieres!: Matiere[];
+  public sections!: Section[];
 
-  content?: string;
   prof: Prof = {
     id: 0,
     prenom: '',
@@ -26,40 +26,29 @@ export class AddprofComponent implements OnInit {
     email: '',
     username: '',
     grade: EGrade.PROFESSEUR,
-
   };
-  professeur!: Prof;
-
   grades = Object.values(EGrade);
+  content?: string;
 
   constructor(
     private service: ProfService,
+    private route: ActivatedRoute,
     private router: Router,
-    private sectionService: SectionService,
-    private matiereService: MatiereService
+    private matiereService: MatiereService,
+    private sectionService: SectionService
   ) {}
   ngOnInit(): void {
-    this.getsections();
+    this.s = this.route.snapshot.paramMap.get('username') || '';
+    this.service.getProf(this.s).subscribe((data: any) => {
+      this.prof = { ...data };
+    });
     this.getmatieres();
+    this.getsections();
   }
-  onSubmit(): void {
-    this.service.addProf(this.prof).subscribe(
-      (newProf: Prof) => {
-        console.log('Nouveau prof ajouté:', newProf);
-        this.router.navigateByUrl('/tables');
-      },
-      (error: any) => {
-        console.error('error :', error);
-        // Handle error scenario
-      }
-    );
-  }
-
   public getmatieres(): void {
     this.matiereService.getMatieres().subscribe(
       (Response: Matiere[]) => {
         this.matieres = Response;
-        console.log(this.matieres);
       },
       (error: HttpErrorResponse) => {
         if (error.error) {
@@ -75,7 +64,6 @@ export class AddprofComponent implements OnInit {
       }
     );
   }
-
   public getsections(): void {
     this.sectionService.getSections().subscribe(
       (Response: Section[]) => {
@@ -92,6 +80,18 @@ export class AddprofComponent implements OnInit {
         } else {
           this.content = `Error with status: ${error.status}`;
         }
+      }
+    );
+  }
+  onSubmit(): void {
+    this.service.updateProf(this.prof).subscribe(
+      (newProf: Prof) => {
+        console.log('New professor added:', newProf);
+        this.router.navigateByUrl('/tables');
+      },
+      (error: any) => {
+        console.error('An error occurred:', error);
+        // Handle error scenario
       }
     );
   }

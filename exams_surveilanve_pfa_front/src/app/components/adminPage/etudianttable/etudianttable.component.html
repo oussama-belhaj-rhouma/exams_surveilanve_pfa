@@ -11,7 +11,6 @@
     >
       <thead>
         <tr>
-          <th>#</th>
           <th>nom</th>
           <th>prenom</th>
           <th>section</th>
@@ -21,12 +20,11 @@
       </thead>
 
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>bougacha</td>
-          <td>amine</td>
-          <td>IF4</td>
-          <td>bougacha@gmail.com</td>
+        <tr *ngFor="let etudiant of etudiants">
+          <td>{{ etudiant.lastName }}</td>
+          <td>{{ etudiant.firstName }}</td>
+          <td>{{ etudiant.section ? etudiant.section.sectionName : "-" }}</td>
+          <td>{{ etudiant.email }}</td>
           <td style="text-align: center">
             <button
               type="button"
@@ -38,17 +36,6 @@
             <button type="button" class="btn btn-danger">supprimer</button>
           </td>
         </tr>
-        <!-- <tr *ngFor="let etudiant of etudiants">
-            <th scope="row">{{ etudiant.id }}</th>
-            <td>{{ etudiant.lastname }}</td>
-            <td>{{ etudiant.firstname }}</td>
-            <td>{{ etudiant.section.name }}</td>
-            <td>{{ etudiant.email }}</td>
-            <td style="text-align: center;">
-              <button type="button" class="btn btn-primary" style="margin-right: 20px;">modifier</button> 
-              <button type="button" class="btn btn-danger" >supprimer</button>
-            </td>
-          </tr> -->
       </tbody>
     </table>
   </div>

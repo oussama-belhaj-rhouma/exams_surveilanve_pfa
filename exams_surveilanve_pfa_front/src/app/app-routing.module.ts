@@ -7,21 +7,28 @@ import { ProfProfileComponent } from './components/prof-profile/prof-profile.com
 import { RegisterComponent } from './components/register/register.component';
 import { ProfComponent } from './components/profPage/prof/prof.component';
 import { EtudiantComponent } from './components/etudiantPage/etudiant/etudiant.component';
-import { AdminComponent } from './components/adminPage/admin/admin.component';
 import { TestComponent } from './components/test/test.component';
 import { RedirectComponent } from './redirect/redirect.component';
+import { TablesComponent } from './components/adminPage/tables/tables.component';
+import { DashboardComponent } from './components/adminPage/dashboard/dashboard.component';
+import { AddprofComponent } from './components/adminPage/addprof/addprof.component';
+import { UpdateprofComponent } from './components/adminPage/updateprof/updateprof.component';
+import { AddetudiantComponent } from './components/adminPage/addetudiant/addetudiant.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: RedirectComponent },
-  // { path: '', redirectTo: 'redirect', pathMatch: 'full' },
-  { path: 'admin', component: AdminComponent },
   { path: 'etudiant', component: EtudiantComponent },
   { path: 'prof', component: ProfComponent },
 
   { path: 'profile', component: ProfProfileComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'calendrier', component: TestComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'tables', component: TablesComponent },
+  { path: 'addprof', component: AddprofComponent },
+  { path: 'updateprof/:username', component: UpdateprofComponent },
+  { path: 'addetudiant', component: AddetudiantComponent },
 ];
 
 @NgModule({

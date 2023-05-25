@@ -16,11 +16,11 @@ export class ProfService {
     });
   }
 
-   public getProf(s: string): Observable<Prof> {
+  public getProf(s: string): Observable<Prof> {
     return this.http.get<Prof>(`http://localhost:8080/prof/find/${s}`, {
       withCredentials: true,
-   });
-   }
+    });
+  }
 
   public addProf(p: Prof): Observable<Prof> {
     return this.http.post<Prof>('http://localhost:8080/prof/add', p, {
@@ -39,10 +39,14 @@ export class ProfService {
       withCredentials: true,
     });
   }
-
   public getHistory(s: string): Observable<any> {
     return this.http.get(`http://localhost:8080/prof/${s}/affectations`, {
-      withCredentials: true
+      withCredentials: true,
     });
   }
+  
+  
+ public addSectionToEtudiant(profId: number, sectionId: number): Observable<Prof> {
+  return this.http.post<Prof>(`http://localhost:8080/prof/addSection/${profId}/${sectionId}`,null )
+}
 }

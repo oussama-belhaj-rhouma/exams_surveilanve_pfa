@@ -1,85 +1,165 @@
-<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-  <div class="wrapper wrapper--w790">
-    <div class="card card-5">
-      <div class="card-heading">
-        <h2 class="title">Event Registration Form</h2>
-      </div>
-      <div class="card-body">
-        <form method="POST">
-          <div class="form-row m-b-55">
-            <div class="name">Name</div>
-            <div class="value">
-              <div class="row row-space">
-                <div class="col-6">
-                  <div class="input-group-desc">
-                    <input
-                      class="input--style-5"
-                      type="text"
-                      name="first_name"
-                    />
-                    <label class="label--desc">first name</label>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <app-side-bar></app-side-bar>
+    </div>
+    <div class="col-9">
+      <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+          <div class="card card-5">
+            <div class="card-heading">
+              <h2 class="title">Ajouter un prof</h2>
+            </div>
+            <div class="card-body">
+              <form (submit)="onSubmit()">
+                <div class="form-row m-b-55">
+                  <div class="name">Nom & Prenom</div>
+                  <div class="value">
+                    <div class="row row-space">
+                      <div class="col-6">
+                        <div class="input-group-desc">
+                          <input
+                            class="input--style-5"
+                            type="text"
+                            [(ngModel)]="prof.prenom"
+                            name="prenom"
+                          />
+                          <label class="label--desc">prenom</label>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="input-group-desc">
+                          <input
+                            class="input--style-5"
+                            type="text"
+                            [(ngModel)]="prof.nom"
+                            name="nom"
+                          />
+                          <label class="label--desc">nom</label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="col-6">
-                  <div class="input-group-desc">
-                    <input
-                      class="input--style-5"
-                      type="text"
-                      name="last_name"
-                    />
-                    <label class="label--desc">last name</label>
+                <div class="form-row">
+                  <div class="name">Username</div>
+                  <div class="value">
+                    <div class="input-group">
+                      <input
+                        class="input--style-5"
+                        type="text"
+                        [(ngModel)]="prof.username"
+                        name="username"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="name">Username</div>
-            <div class="value">
-              <div class="input-group">
-                <input class="input--style-5" type="text" name="company" />
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="name">Email</div>
-            <div class="value">
-              <div class="input-group">
-                <input class="input--style-5" type="email" name="email" />
-              </div>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="name">Grade</div>
-            <div class="value">
-              <div class="input-group">
-                <div class="rs-select2 js-select-simple select--no-search">
-                  <select
-                    class="form-select"
-                    aria-label="Default select example"
-                    name="subject"
-                  >
-                    <option disabled="disabled" selected="selected">
-                      Choose option
-                    </option>
-                    <option>ASSISTANT</option>
-                    <option>MAITRE_ASSISTANT</option>
-                    <option>MAITRE_DE_CONFERENCE</option>
-                    <option>PROFESSEUR</option>
-                  </select>
-                  <div class="select-dropdown"></div>
+                <div class="form-row">
+                  <div class="name">Email</div>
+                  <div class="value">
+                    <div class="input-group">
+                      <input
+                        class="input--style-5"
+                        type="email"
+                        name="email"
+                        [(ngModel)]="prof.email"
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
+
+                <div class="form-row">
+                  <div class="name">Grade</div>
+                  <div class="value">
+                    <div class="input-group">
+                      <div
+                        class="rs-select2 js-select-simple select--no-search"
+                      >
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                          [(ngModel)]="prof.grade"
+                          name="grade"
+                        >
+                          <option disabled="disabled" selected="selected">
+                            Choose option
+                          </option>
+                          <option *ngFor="let grade of grades" [value]="grade">
+                            {{ grade }}
+                          </option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="name">Section</div>
+                  <div class="value">
+                    <div class="input-group">
+                      <div
+                        class="rs-select2 js-select-simple select--no-search"
+                      >
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                          [(ngModel)]="prof.sections"
+                          name="grade"
+                          required
+                        >
+                          <option disabled="disabled" selected="selected">
+                            Choisir une section
+                          </option>
+                          <option
+                            *ngFor="let s of sections"
+                            [value]="s.sectionName"
+                          >
+                            {{ s.sectionName }}
+                          </option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="name">Matiere</div>
+                  <div class="value">
+                    <div class="input-group">
+                      <div
+                        class="rs-select2 js-select-simple select--no-search"
+                      >
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                          [(ngModel)]="prof.matieres"
+                          name="grade"
+                          required
+                        >
+                          <option disabled="disabled" selected="selected">
+                            Choisir une matiere
+                          </option>
+                          <option *ngFor="let m of matieres" [value]="m.name">
+                            {{ m.name }}
+                          </option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <button class="btn btn--radius-2 btn--red" type="submit">
+                    Ajouter prof
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
-
-          <div>
-            <button class="btn btn--radius-2 btn--red" type="submit">
-              Register
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>

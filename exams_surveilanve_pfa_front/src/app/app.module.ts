@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminComponent } from './components/adminPage/admin/admin.component';
 import { EtudiantComponent } from './components/etudiantPage/etudiant/etudiant.component';
 import { ProfComponent } from './components/profPage/prof/prof.component';
 import { HistoryCardComponent } from './components/history-card/history-card.component';
@@ -23,6 +22,9 @@ import { AddprofComponent } from './components/adminPage/addprof/addprof.compone
 import { httpInterceptorProviders } from './interceptor/intex';
 import { TestComponent } from './components/test/test.component';
 import { RedirectComponent } from './redirect/redirect.component';
+import { UpdateprofComponent } from './components/adminPage/updateprof/updateprof.component';
+import { UpdateetudiantComponent } from './components/adminPage/updateetudiant/updateetudiant.component';
+import { AddetudiantComponent } from './components/adminPage/addetudiant/addetudiant.component';
 
 //import { HorizontalScrollMenuModule } from 'ngx-horizontal-scroll-menu';
 @NgModule({
@@ -33,7 +35,6 @@ import { RedirectComponent } from './redirect/redirect.component';
     LoginComponent,
     ProfProfileComponent,
     RegisterComponent,
-    AdminComponent,
     EtudiantComponent,
     ProfComponent,
     HistoryCardComponent,
@@ -45,6 +46,9 @@ import { RedirectComponent } from './redirect/redirect.component';
     AddprofComponent,
     TestComponent,
     RedirectComponent,
+    UpdateprofComponent,
+    UpdateetudiantComponent,
+    AddetudiantComponent,
   ],
   imports: [FormsModule, BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [httpInterceptorProviders],

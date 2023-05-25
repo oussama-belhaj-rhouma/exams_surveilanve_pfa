@@ -26,15 +26,13 @@ export class RedirectComponent implements OnInit {
       this.prof = this.roles.includes('ROLE_PROF');
       this.etudiant = this.roles.includes('ROLE_ETUDIANT');
 
-      if (!this.isLoggedIn) {
-        this.router.navigate(['/login']);
+      if (this.roles.includes('ROLE_ADMIN')) {
+        this.router.navigate(['dashboard']);
       } else {
-        if (this.roles.includes('ROLE_ADMIN')) {
-          this.router.navigate(['admin']);
-        } else {
-          this.router.navigate(['calendrier']);
-        }
+        this.router.navigate(['calendrier']);
       }
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 }
