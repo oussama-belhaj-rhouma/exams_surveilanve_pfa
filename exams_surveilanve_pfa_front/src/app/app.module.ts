@@ -25,6 +25,7 @@ import { RedirectComponent } from './redirect/redirect.component';
 import { UpdateprofComponent } from './components/adminPage/updateprof/updateprof.component';
 import { UpdateetudiantComponent } from './components/adminPage/updateetudiant/updateetudiant.component';
 import { AddetudiantComponent } from './components/adminPage/addetudiant/addetudiant.component';
+import { AddaffecComponent } from './components/adminPage/addaffec/addaffec.component';
 
 //import { HorizontalScrollMenuModule } from 'ngx-horizontal-scroll-menu';
 @NgModule({
@@ -49,6 +50,7 @@ import { AddetudiantComponent } from './components/adminPage/addetudiant/addetud
     UpdateprofComponent,
     UpdateetudiantComponent,
     AddetudiantComponent,
+    AddaffecComponent,
   ],
   imports: [FormsModule, BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [httpInterceptorProviders],
