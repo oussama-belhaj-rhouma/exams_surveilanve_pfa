@@ -7,7 +7,7 @@ export interface Prof {
   id: number;
   prenom: string;
   nom: string;
-  grade: EGrade;
+  grade?: EGrade; 
   username: string;
   email: string;
   password?: string;

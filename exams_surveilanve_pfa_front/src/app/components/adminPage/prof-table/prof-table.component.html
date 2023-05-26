@@ -27,9 +27,22 @@
           <td>{{ prof.prenom }}</td>
           <td>{{ prof.grade }}</td>
           <td>{{ prof.email }}</td>
-          <td>{{ prof.sections ? prof.sections[0].sectionName : "-" }}</td>
-          <td>{{ prof.matieres }}</td>
-
+          <td>
+            <ng-container *ngIf="prof.sections && prof.sections.length > 0; else noSections">
+              <ul>
+                <p *ngFor="let section of prof.sections">{{ section.sectionName }}</p>
+              </ul>
+            </ng-container>
+            <ng-template #noSections>-</ng-template>
+          </td>  
+         <td>
+            <ng-container *ngIf="prof.matieres && prof.matieres.length > 0; else noMatieres">
+              <ul>
+                <p *ngFor="let matiere of prof.matieres">{{ matiere.name }}</p>
+              </ul>
+            </ng-container>
+            <ng-template #noMatieres>-</ng-template>
+          </td>  
           <td style="text-align: center">
             <a routerLinkActive="active" href="/updateprof/{{ prof.username }}"
               ><button
@@ -43,7 +56,6 @@
             <button
               type="button"
               class="btn btn-danger"
-              (click)="onDeleteProf(prof.id)"
             >
               supprimer
             </button>

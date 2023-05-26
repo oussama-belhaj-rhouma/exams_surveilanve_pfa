@@ -101,23 +101,17 @@
                       <div
                         class="rs-select2 js-select-simple select--no-search"
                       >
-                        <select
-                          class="form-select"
-                          aria-label="Default select example"
-                          [(ngModel)]="prof.sections"
-                          name="grade"
-                          required
-                        >
-                          <option disabled="disabled" selected="selected">
-                            Choisir une section
-                          </option>
-                          <option
-                            *ngFor="let s of sections"
-                            [value]="s.sectionName"
-                          >
-                            {{ s.sectionName }}
-                          </option>
-                        </select>
+                      <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      [(ngModel)]="prof.sections"
+                      name="sections"
+                      multiple
+                      required
+                    >
+                      <option disabled selected>Choisir des sections</option>
+                      <option *ngFor="let section of sections" [ngValue]="section">{{ section.sectionName }}</option>
+                    </select>
                         <div class="select-dropdown"></div>
                       </div>
                     </div>
@@ -125,32 +119,28 @@
                 </div>
 
                 <div class="form-row">
-                  <div class="name">Matiere</div>
+                  <div class="name">Matieres</div>
                   <div class="value">
                     <div class="input-group">
                       <div
                         class="rs-select2 js-select-simple select--no-search"
                       >
-                        <select
-                          class="form-select"
-                          aria-label="Default select example"
-                          [(ngModel)]="prof.matieres"
-                          name="grade"
-                          required
-                        >
-                          <option disabled="disabled" selected="selected">
-                            Choisir une matiere
-                          </option>
-                          <option *ngFor="let m of matieres" [value]="m.name">
-                            {{ m.name }}
-                          </option>
-                        </select>
+                      <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      [(ngModel)]="prof.matieres"
+                      name="matieres"
+                      multiple
+                      required
+                    >
+                      <option disabled selected>Choisir des matieres</option>
+                      <option *ngFor="let matiere of matieres" [ngValue]="matiere">{{ matiere.name }}</option>
+                    </select>
                         <div class="select-dropdown"></div>
                       </div>
                     </div>
                   </div>
                 </div>
-
                 <div>
                   <button class="btn btn--radius-2 btn--red" type="submit">
                     Ajouter prof

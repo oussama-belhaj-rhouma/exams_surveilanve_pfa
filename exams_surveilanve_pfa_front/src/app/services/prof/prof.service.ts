@@ -49,4 +49,7 @@ export class ProfService {
  public addSectionToEtudiant(profId: number, sectionId: number): Observable<Prof> {
   return this.http.post<Prof>(`http://localhost:8080/prof/addSection/${profId}/${sectionId}`,null )
 }
+ public addMatiereToProf(profId: number, matiereId: number): Observable<Prof> {
+  return this.http.post<Prof>(`http://localhost:8080/prof/addMatiere/${profId}/${matiereId}`,null )
+}
 }

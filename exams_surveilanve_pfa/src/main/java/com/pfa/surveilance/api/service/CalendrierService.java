@@ -49,8 +49,8 @@ public class CalendrierService {
 
         calendrier.getAffectations().add(affectation);
 
-        Calendrier calendrier1 = calendrierRepo.save(calendrier);
-        return calendrier1;
+        calendrierRepo.save(calendrier);
+        return calendrier;
     }
 
 

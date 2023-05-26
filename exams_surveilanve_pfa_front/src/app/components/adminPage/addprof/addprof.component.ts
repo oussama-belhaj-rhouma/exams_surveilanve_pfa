@@ -8,6 +8,9 @@ import { SectionService } from 'src/app/services/section/section.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatiereService } from 'src/app/services/matiere/matiere.service';
 import { Matiere } from 'src/app/models/Matiere';
+import { Observable, catchError, forkJoin, mergeMap, of, switchMap, throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-addprof',
@@ -20,7 +23,7 @@ export class AddprofComponent implements OnInit {
 
   content?: string;
   prof: Prof = {
-    id: 0,
+    id:0,
     prenom: '',
     nom: '',
     email: '',
@@ -36,30 +39,30 @@ export class AddprofComponent implements OnInit {
     private service: ProfService,
     private router: Router,
     private sectionService: SectionService,
-    private matiereService: MatiereService
+    private matiereService: MatiereService,
+    private toastr: ToastrService
   ) {}
   ngOnInit(): void {
     this.getsections();
     this.getmatieres();
   }
-  onSubmit(): void {
-    this.service.addProf(this.prof).subscribe(
-      (newProf: Prof) => {
-        console.log('Nouveau prof ajouté:', newProf);
-        this.router.navigateByUrl('/tables');
-      },
-      (error: any) => {
-        console.error('error :', error);
-        // Handle error scenario
-      }
-    );
-  }
+  // onSubmit(): void {
+  //   this.service.addProf(this.prof).subscribe(
+  //     (newProf: Prof) => {
+  //       console.log('Nouveau prof ajouté:', newProf);
+  //       this.router.navigateByUrl('/tables');
+  //     },
+  //     (error: any) => {
+  //       console.error('error :', error);
+  //       // Handle error scenario
+  //     }
+  //   );
+  // }
 
   public getmatieres(): void {
     this.matiereService.getMatieres().subscribe(
       (Response: Matiere[]) => {
         this.matieres = Response;
-        console.log(this.matieres);
       },
       (error: HttpErrorResponse) => {
         if (error.error) {
@@ -80,6 +83,7 @@ export class AddprofComponent implements OnInit {
     this.sectionService.getSections().subscribe(
       (Response: Section[]) => {
         this.sections = Response;
+        console.log(this.sections)
       },
       (error: HttpErrorResponse) => {
         if (error.error) {
@@ -95,4 +99,63 @@ export class AddprofComponent implements OnInit {
       }
     );
   }
+
+  onSubmit(): void {
+    this.service
+      .addProf({
+        id: 0,
+        nom: this.prof.nom,
+        prenom: this.prof.prenom,
+        email: this.prof.email,
+        username: this.prof.username,
+        grade: this.prof.grade
+      })
+      .pipe(
+        mergeMap((newProf: Prof) => {
+          console.log('Nouveau prof ajouté:', newProf);
+          const sectionObs = this.callAddSectionToProf(newProf);
+          const matiereObs = this.callAddMatiereToProf(newProf);
+          this.toastr.success('Nouveau professeur ajouté')
+          return forkJoin([sectionObs, matiereObs]);
+        }),
+        catchError((error: any) => {
+          console.error('error:', error);
+  
+          if (error.status === 500) {
+            this.toastr.error('Impossible to load. Please try again later.', 'Error');
+
+          }
+  
+          return throwError(error);
+        })
+      )
+      .subscribe(() => {
+        this.router.navigateByUrl('/tables');
+      });
+  }
+  
+  
+  
+  callAddSectionToProf(newProf: Prof) {
+    const selectedSections = this.prof.sections;
+    if (selectedSections !== undefined && selectedSections.length > 0 && newProf.id) {
+      return forkJoin(
+        selectedSections.map(section => this.service.addSectionToEtudiant(newProf.id, section.id!))
+      );
+    } else {
+      return of(null);
+    }
+  }
+  
+  callAddMatiereToProf(newProf: Prof) {
+    const selectedMatieres = this.prof.matieres;
+    if (selectedMatieres !== undefined && selectedMatieres.length > 0 && newProf.id) {
+      return forkJoin(
+        selectedMatieres.map(matiere => this.service.addMatiereToProf(newProf.id, matiere.id!))
+      );
+    } else {
+      return of(null);
+    }
+  }
+  
 }
