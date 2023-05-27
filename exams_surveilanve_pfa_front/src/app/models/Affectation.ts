@@ -5,9 +5,8 @@ import { Matiere } from './Matiere';
 import { Salle } from './Salle';
 
 export interface Affectation {
-  id: number;
+  id?: number;
   dayy: string;
-  code: string;
   section: Section;
   professors: Prof[];
   calendrier: Calendrier;

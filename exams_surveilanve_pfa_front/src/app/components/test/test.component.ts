@@ -94,4 +94,9 @@ export class TestComponent implements OnInit {
       }
     }
   }
+
+  
+
+  public testetudiant() {}
+
 }

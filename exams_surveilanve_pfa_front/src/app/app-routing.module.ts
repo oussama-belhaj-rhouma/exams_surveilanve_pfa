@@ -14,6 +14,7 @@ import { DashboardComponent } from './components/adminPage/dashboard/dashboard.c
 import { AddprofComponent } from './components/adminPage/addprof/addprof.component';
 import { UpdateprofComponent } from './components/adminPage/updateprof/updateprof.component';
 import { AddetudiantComponent } from './components/adminPage/addetudiant/addetudiant.component';
+import { AddaffecComponent } from './components/adminPage/addaffec/addaffec.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'addprof', component: AddprofComponent },
   { path: 'updateprof/:username', component: UpdateprofComponent },
   { path: 'addetudiant', component: AddetudiantComponent },
+  { path: 'addaffec', component: AddaffecComponent },
 ];
 
 @NgModule({

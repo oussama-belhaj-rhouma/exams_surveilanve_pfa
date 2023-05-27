@@ -25,9 +25,6 @@ import { RedirectComponent } from './redirect/redirect.component';
 import { UpdateprofComponent } from './components/adminPage/updateprof/updateprof.component';
 import { UpdateetudiantComponent } from './components/adminPage/updateetudiant/updateetudiant.component';
 import { AddetudiantComponent } from './components/adminPage/addetudiant/addetudiant.component';
-import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 //import { HorizontalScrollMenuModule } from 'ngx-horizontal-scroll-menu';
 @NgModule({
@@ -53,7 +50,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UpdateetudiantComponent,
     AddetudiantComponent,
   ],
-  imports: [FormsModule, BrowserModule, AppRoutingModule, HttpClientModule,  BrowserAnimationsModule, ToastrModule.forRoot() ],
+  imports: [FormsModule, BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
