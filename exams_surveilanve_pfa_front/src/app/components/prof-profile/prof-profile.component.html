@@ -1,7 +1,7 @@
 <div id="order" style="background-color: #e7f6f2">
   <div class="parent">
     <div class="container">
-      <p class="text">Bienvenue Mr {{ currentProf.prenom }}</p>
+      <p class="text">Bienvenue Mr {{ currentProf.prenom }} </p>
     </div>
     <img
       src="../../../assets/images/Toppagevector.png"
@@ -69,7 +69,7 @@
         </div>
         <div class="wrapper">
           <div class="box">
-            <input class="input" [(ngModel)]="currentProf.grade" id="grade" type="text" name="grade" required type="hidden" />
+            <input class="input" [(ngModel)]="currentProf.grade" id="grade" type="text" name="grade" required type="hidden" readonly/>
 
             <label class="label">Nom :</label>
             <div class="davdouv">
