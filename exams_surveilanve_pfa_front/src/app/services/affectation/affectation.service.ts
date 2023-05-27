@@ -40,20 +40,20 @@ export class AffectationService {
     });
   }
 
-  public addSection(affectationId: number , sectionId: number): Observable<void>{
-    return this.http.post<void>(`http://localhost:8080/affectation/addSection/${affectationId}/${sectionId}`,null)
+  public addSection(affectationId: number , sectionId: number): Observable<Affectation>{
+    return this.http.post<Affectation>(`http://localhost:8080/affectation/addSection/${affectationId}/${sectionId}`,null)
   }
-  public addMatiere(affectationId: number , matiereId: number): Observable<void>{
-    return this.http.post<void>(`http://localhost:8080/affectation/addMatiere/${affectationId}/${matiereId}`,null)
+  public addMatiere(affectationId: number , matiereId: number): Observable<Affectation>{
+    return this.http.post<Affectation>(`http://localhost:8080/affectation/addMatiere/${affectationId}/${matiereId}`,null)
  }
 
-  public addSalle(affectationId: number , salleId: number): Observable<void>{
-    return this.http.post<void>(`http://localhost:8080/affectation/addSalle/${affectationId}/${salleId}`,null)
+  public addSalle(affectationId: number , salleId: number): Observable<Affectation>{
+    return this.http.post<Affectation>(`http://localhost:8080/affectation/addSalle/${affectationId}/${salleId}`,null)
  }
 
 
-    public addProf(affectationId: number , profId: number): Observable<void>{
-      return this.http.post<void>(`http://localhost:8080/affectation/addProf/${affectationId}/${profId}`,null)
+    public addProf(affectationId: number , profId: number): Observable<Affectation>{
+      return this.http.post<Affectation>(`http://localhost:8080/affectation/addProf/${affectationId}/${profId}`,null)
     }
 
 

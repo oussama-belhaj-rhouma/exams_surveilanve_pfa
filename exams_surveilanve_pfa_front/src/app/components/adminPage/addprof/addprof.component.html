@@ -94,13 +94,13 @@
                   </div>
                 </div>
 
-                <div class="form-row">
+               <div class="form-row">
                   <div class="name">Section</div>
                   <div class="value">
                     <div class="input-group">
                       <div
                         class="rs-select2 js-select-simple select--no-search"
-                      >
+                       >
                       <select
                       class="form-select"
                       aria-label="Default select example"
@@ -110,7 +110,9 @@
                       required
                     >
                       <option disabled selected>Choisir des sections</option>
-                      <option *ngFor="let section of sections" [ngValue]="section">{{ section.sectionName }}</option>
+                      <option *ngFor="let section of sections" [ngValue]="section">
+                        {{ section.sectionName }}
+                      </option>
                     </select>
                         <div class="select-dropdown"></div>
                       </div>
