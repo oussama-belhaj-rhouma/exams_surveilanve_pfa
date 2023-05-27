@@ -4,12 +4,14 @@ import { Router } from '@angular/router';
 import { catchError, forkJoin, mergeMap, of, throwError } from 'rxjs';
 import { Affectation } from 'src/app/models/Affectation';
 import { ESession } from 'src/app/models/ESession';
+import { Etudiant } from 'src/app/models/Etudiant';
 import { Matiere } from 'src/app/models/Matiere';
 import { Prof } from 'src/app/models/Prof';
 import { Salle } from 'src/app/models/Salle';
 import { Section } from 'src/app/models/Section';
 import { Session } from 'src/app/models/Session';
 import { AffectationService } from 'src/app/services/affectation/affectation.service';
+import { EtudiantService } from 'src/app/services/etudiant/etudiant.service';
 import { MatiereService } from 'src/app/services/matiere/matiere.service';
 import { ProfService } from 'src/app/services/prof/prof.service';
 import { SalleService } from 'src/app/services/salle/salle.service';
@@ -28,8 +30,10 @@ export class TestComponent implements OnInit {
   public profs!: Prof[];
   public salles!: Salle[];
   public affectations!: Affectation[];
+  et = true;
 
   public sessions!: Session[];
+  currentEtudiant!: Etudiant;
 
   jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
   times = ['8:30-10:00', '10:15-11:45', '12:00-13:30', '13:45-15:15'];
@@ -37,25 +41,50 @@ export class TestComponent implements OnInit {
     id: 0,
   };
   content?: string;
+  currentUser: any;
 
   constructor(
-    private service: AffectationService,
     private storageService: StorageService,
+    private etudiantService: EtudiantService,
+    private service: AffectationService,
     private sectionService: SectionService,
     private salleService: SalleService,
     private matiereService: MatiereService,
     private profService: ProfService,
     private sessionService: SessionService,
+    private etudiantServixe: EtudiantService,
     private router: Router
   ) {}
-  currentUser: any;
 
   ngOnInit(): void {
     this.getAffectation();
     this.getmatieres();
     this.getprofs();
     this.getsalles();
+    this.currentUser = this.storageService.getUser();
     this.getsections();
+    this.getEtudiant();
+  }
+
+  public getEtudiant(): void {
+    this.etudiantService.getEtudiant(this.currentUser.username).subscribe(
+      (Response: Etudiant) => {
+        this.currentEtudiant = Response;
+        console.log(this.currentEtudiant);
+      },
+      (error: HttpErrorResponse) => {
+        if (error.error) {
+          try {
+            const res = JSON.parse(error.error);
+            this.currentEtudiant = res.message;
+          } catch {
+            this.content = `Error with status: ${error.status} - ${error.statusText}`;
+          }
+        } else {
+          this.content = `Error with status: ${error.status}`;
+        }
+      }
+    );
   }
 
   public getAffectation(): void {
@@ -71,8 +100,9 @@ export class TestComponent implements OnInit {
             this.testprof();
             break;
           case 'ROLE_ETUDIANT':
-            
+            this.et = false;
             console.log('Option 3 selected');
+            this.testetudiant();
             break;
           default:
             console.log('Invalid ROLE');
@@ -127,6 +157,10 @@ export class TestComponent implements OnInit {
     }
   }
 
+  public testetudiant() {
+    console.log(this.etudiantServixe.getCalendriers);
+  }
+
   public testprof() {
     for (let i = 0; i < this.affectations.length; i++) {
       for (
@@ -163,30 +197,6 @@ export class TestComponent implements OnInit {
     button.click();
   }
 
-  //  public addAffectation(
-  //    affectation: Affectation ,
-  //    section: Section | null,
-  //    matiere: Matiere | null,
-  //    prof: Prof | null,
-  //    salle: Salle | null,
-  //    session: Session | null
-  //  ): void {
-  //    this.service.addAffectation(affectation).subscribe(
-  //     (response: Affectation) => {
-  //        console.log(response);
-  //        this.getAffectation();
-  //        this.getsections();
-  //        this.getmatieres();
-  //        this.getprofs();
-  //        this.getsalles();
-  //        this.getsessions();
-  //        this.router.navigate(['/affectation']);
-  //      },
-  //      (error: HttpErrorResponse) => {
-  //        alert(error.message);
-  //      }
-  //    );
-  //  }
   public getsections(): void {
     this.sectionService.getSections().subscribe(
       (Response: Section[]) => {
@@ -286,8 +296,6 @@ export class TestComponent implements OnInit {
       }
     );
   }
-
-  public testetudiant() {}
 
   callAddSectionAffectation(newAffectation: Affectation) {
     const selectedSection = this.affectation.section;
