@@ -21,7 +21,7 @@
                     <option disabled="disabled" selected="selected">
                       Choisir une section
                     </option>
-                    <option *ngFor="let s of sections" [ngValue]="s">
+                    <option *ngFor="let s of sections">
                       {{ s.sectionName }}
                     </option>
                   </select>
@@ -46,7 +46,7 @@
                     <option disabled="disabled" selected="selected">
                       Choisir une matiere
                     </option>
-                    <option *ngFor="let m of matieres" [ngValue]="m">
+                    <option *ngFor="let m of matieres">
                       {{ m.name }}
                     </option>
                   </select>
@@ -71,7 +71,7 @@
                     <option disabled="disabled" selected="selected">
                       Choisir un Professeur
                     </option>
-                    <option *ngFor="let p of profs" [ngValue]="p">
+                    <option *ngFor="let p of profs">
                       {{ p.username }}
                     </option>
                   </select>
@@ -96,7 +96,7 @@
                     <option disabled="disabled" selected="selected">
                       Choisir une salle
                     </option>
-                    <option *ngFor="let s of salles" [ngValue]="s">
+                    <option *ngFor="let s of salles">
                       {{ s.roomNumber }}
                     </option>
                   </select>
@@ -121,7 +121,7 @@
                     <option disabled="disabled" selected="selected">
                       Choisir une session
                     </option>
-                    <option *ngFor="let s of sessions" [ngValue]="s">
+                    <option *ngFor="let s of sessions">
                       {{ s.sessionName }}
                     </option>
                   </select>
