@@ -15,10 +15,10 @@ export class ProfTableComponent implements OnInit {
   content?: string;
 
   ngOnInit(): void {
-    this.getprofs();
+    this.getProfs();
   }
 
-  public getprofs(): void {
+  public getProfs(): void {
     this.service.getProfs().subscribe(
       (Response: Prof[]) => {
         this.profs = Response;
@@ -38,11 +38,12 @@ export class ProfTableComponent implements OnInit {
       }
     );
   }
+
   public onDeleteProf(id: number) {
     this.service.deleteProf(id).subscribe(
       (Response: any) => {
         console.log(Response);
-        this.getprofs();
+        this.getProfs();
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);

@@ -15,7 +15,7 @@ import { AddprofComponent } from './components/adminPage/addprof/addprof.compone
 import { UpdateprofComponent } from './components/adminPage/updateprof/updateprof.component';
 import { AddetudiantComponent } from './components/adminPage/addetudiant/addetudiant.component';
 import { AddaffecComponent } from './components/adminPage/addaffec/addaffec.component';
-
+import { UpdateetudiantComponent } from './components/adminPage/updateetudiant/updateetudiant.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: RedirectComponent },
@@ -31,6 +31,7 @@ const routes: Routes = [
   { path: 'updateprof/:username', component: UpdateprofComponent },
   { path: 'addetudiant', component: AddetudiantComponent },
   { path: 'addaffec', component: AddaffecComponent },
+  { path: 'updateetudiant/:username', component: UpdateetudiantComponent },
 ];
 
 @NgModule({

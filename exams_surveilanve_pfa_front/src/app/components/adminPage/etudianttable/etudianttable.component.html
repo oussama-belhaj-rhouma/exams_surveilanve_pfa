@@ -26,14 +26,25 @@
           <td>{{ etudiant.section ? etudiant.section.sectionName : "-" }}</td>
           <td>{{ etudiant.email }}</td>
           <td style="text-align: center">
+            <a
+              routerLinkActive="active"
+              href="/updateetudiant/{{ etudiant.username }}"
+            >
+              <button
+                type="button"
+                class="btn btn-primary"
+                style="margin-right: 20px"
+              >
+                modifier
+              </button>
+            </a>
             <button
               type="button"
-              class="btn btn-primary"
-              style="margin-right: 20px"
+              class="btn btn-danger"
+              (click)="onDeleteEtudiant(etudiant.id)"
             >
-              modifier
+              supprimer
             </button>
-            <button type="button" class="btn btn-danger">supprimer</button>
           </td>
         </tr>
       </tbody>

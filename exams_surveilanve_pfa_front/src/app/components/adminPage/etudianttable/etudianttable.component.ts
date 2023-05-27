@@ -1,4 +1,3 @@
-
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Etudiant } from 'src/app/models/Etudiant';
@@ -6,7 +5,7 @@ import { EtudiantService } from 'src/app/services/etudiant/etudiant.service';
 @Component({
   selector: 'app-etudianttable',
   templateUrl: './etudianttable.component.html',
-  styleUrls: ['./etudianttable.component.css']
+  styleUrls: ['./etudianttable.component.css'],
 })
 export class EtudianttableComponent implements OnInit {
   constructor(private service: EtudiantService) {}
@@ -39,7 +38,7 @@ export class EtudianttableComponent implements OnInit {
     );
   }
 
-  public onDeleteEtudiant(id: number) {
+  public onDeleteEtudiant(id: number | any) {
     this.service.deleteEtudiant(id).subscribe(
       (Response: any) => {
         console.log(Response);

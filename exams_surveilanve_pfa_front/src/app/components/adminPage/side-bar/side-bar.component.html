@@ -8,10 +8,11 @@
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
       <a
-        class="nav-link active"
+        class="nav-link text-white"
         aria-current="page"
-        outerLinkActive="active"
-        href="/dashboard"
+        [routerLink]="['/dashboard']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
       >
         <svg class="bi pe-none me-2" width="16" height="16">
           <use xlink:href="#home" />
@@ -20,7 +21,7 @@
       </a>
     </li>
     <li>
-      <a class="nav-link text-white" outerLinkActive="active" href="/tables">
+      <a class="nav-link text-white" [routerLink]="['/tables']" routerLinkActive="active">
         <svg class="bi pe-none me-2" width="16" height="16">
           <use xlink:href="#table" />
         </svg>
@@ -28,7 +29,7 @@
       </a>
     </li>
     <li>
-      <a class="nav-link text-white" outerLinkActive="active" href="/addprof">
+      <a class="nav-link text-white" [routerLink]="['/addprof']" routerLinkActive="active">
         <svg class="bi pe-none me-2" width="16" height="16">
           <use xlink:href="#grid" />
         </svg>
@@ -36,7 +37,11 @@
       </a>
     </li>
     <li>
-      <a  class="nav-link text-white" outerLinkActive="active" href="/addetudiant">
+      <a
+        class="nav-link text-white"
+        [routerLink]="['/addetudiant']"
+        routerLinkActive="active"
+      >
         <svg class="bi pe-none me-2" width="16" height="16">
           <use xlink:href="#grid" />
         </svg>
@@ -56,12 +61,12 @@
         <svg class="bi pe-none me-2" width="16" height="16">
           <use xlink:href="#people-circle" />
         </svg>
-        Profile
+        Calendrier
       </a>
     </li>
+    
   </ul>
-  <hr />
-  <div class="dropdown">
+  <hr style="color: white;" />
     <a
       href="#"
       class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
@@ -73,13 +78,14 @@
         alt=""
         width="32"
         height="32"
-        class="rounded-circle me-2"
+        style="margin-right: 10px;"
+        class="rounded-circle "
       />
       <strong>{{ currentUser.username }}</strong>
     </a>
-    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-      <!-- <li><hr class="dropdown-divider" /></li> -->
-      <li><a class="dropdown-item" href="#">Sign out</a></li>
-    </ul>
-  </div>
+
+
+ 
 </div>
+
+
