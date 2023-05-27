@@ -1,11 +1,46 @@
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
   </button>
-<div class="buttons">
+<div *ngIf="et"
+class="buttons">
   <div class="button2">
     <button type="submit" class="sauvbtn"  role="button" (click)="onOpenModal(null,'add')">Ajouer affectation <span class="sr-only">(current)</span></button>
 </div>
 </div>
+<div *ngIf="!et" >
+  <div
+      style="
+        position: relative;
+        top: top;
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+        margin-left: 20px;
+        cursor: default;
+      "
+    >
+    <span style="color: #4cacc6">Section </span>
+    <span style="color: #000000"> {{ currentEtudiant.section!.sectionName }}</span>
+
+      <div
+        style="
+          width: 83px;
+          height: 4px;
+          margin: 5px auto;
+          background-color: #0b6d87;
+        "
+      ></div>
+      <div
+        style="
+          width: 40px;
+          height: 4px;
+          margin: 0px auto;
+          background-color: #0b6d87;
+          margin-bottom: 5px;
+        "
+      ></div>
+    </div>
+   </div>
 <div class="container" id="main-container">
   <table class="table">
     <thead>
@@ -264,8 +299,8 @@
             </div>
 
             <div>
-              <button class="btn btn--radius-2 btn--red" type="submit">
-                Ajouter
+              <button class="btn btn--radius-2 btn--blue" class="btn btn-primary" type="submit" id="popupButton">
+                Submit
               </button>
             </div>
           </form>

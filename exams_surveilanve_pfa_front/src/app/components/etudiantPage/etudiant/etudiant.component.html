@@ -1,1 +1,103 @@
-<p>etudiant works!</p>
+<div id="order" style="background-color: #e7f6f2">
+    <div class="parent">
+      <div class="container">
+        <p class="text">Bienvenue Mr {{ currentEtudiant.firstName }}</p>
+      </div>
+      <img
+        src="../../../assets/images/Toppagevector.png"
+        alt="vector"
+        id="vector"
+      />
+    </div>
+    <img class="logoo" src="../../../assets/images/user.svg" alt="logo" />
+    <div class="infoPersonnelles">
+      <div
+        style="
+          position: relative;
+          top: top;
+          text-align: center;
+          font-size: 36px;
+          font-weight: bold;
+          margin-left: 20px;
+          cursor: default;
+        "
+      >
+        <span style="color: #4cacc6">Informations</span>
+        <span style="color: #000000"> Personnelles</span>
+        <div
+          style="
+            width: 83px;
+            height: 4px;
+            margin: 5px auto;
+            background-color: #0b6d87;
+          "
+        ></div>
+        <div
+          style="
+            width: 40px;
+            height: 4px;
+            margin: 0px auto;
+            background-color: #0b6d87;
+            margin-bottom: 5px;
+          "
+        ></div>
+      </div>
+  
+        <form #updateForm="ngForm" (ngSubmit)="onUpdateEtudiant(updateForm)">
+          <div class="formulaire">
+  
+          <div class="wrapper">
+            <div class="box">
+              <label class="label">Prénom:</label>
+              <div class="davdouv">
+                <input class="input" [(ngModel)]="currentEtudiant.firstName" id="firstName" type="text" name="firstName" required />
+              </div>
+            </div>
+            <input class="input" [(ngModel)]="currentEtudiant.id" id="id" type="number" name="id" type="hidden" />
+            <input class="input" [(ngModel)]="currentEtudiant.username" id="username" type="text" name="username" type="hidden" />
+            <input class="input" [(ngModel)]="currentEtudiant.section" id="section" type="text" name="section" type="hidden" />
+  
+            <div class="box">
+              <label class="label">Section :</label>
+              <div class="davdouv">
+                <input class="input" [(ngModel)]="currentEtudiant.section!.sectionName" id="section" type="text" name="section" required readonly  />
+              </div>
+            </div>
+          </div>
+          <div class="wrapper">
+            <div class="box">
+              <input class="input" [(ngModel)]="currentEtudiant.firstName" id="firstName" type="text" name="grade" required type="hidden" readonly/>
+  
+              <label class="label">Nom :</label>
+              <div class="davdouv">
+                <input class="input" [(ngModel)]="currentEtudiant.lastName" id="lastName" type="text" name="lastName" required />
+              </div>
+            </div>
+            <div class="box">
+              <label class="label">Email :</label>
+              <div class="davdouv">
+                <input class="input" [(ngModel)]="currentEtudiant.email" id="email" type="text" name="email" required />
+              </div>
+            </div>
+          </div>
+         
+          <div class="buttons">
+            <div class="button1">
+                <button type="button" id="update-form" class="retour">Annuler</button>
+            </div>
+            <div class="button2">
+                <button type="submit" class="sauvbtn">Sauvegarder</button>
+            </div>
+          </div>
+        </div>
+  
+        </form>
+    </div>
+  
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  
+    <!-- <Toppage bgImg={true}>COMMANDER MAINTENANT!</Toppage> -->
+   
