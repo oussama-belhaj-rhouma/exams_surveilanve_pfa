@@ -35,10 +35,8 @@ export class TestComponent implements OnInit {
   times = ['8:30-10:00', '10:15-11:45', '12:00-13:30', '13:45-15:15'];
   affectation: Affectation = {
     id: 0,
-
   };
   content?: string;
-
 
   constructor(
     private service: AffectationService,
@@ -64,15 +62,16 @@ export class TestComponent implements OnInit {
     this.service.getAffectations().subscribe(
       (Response: Affectation[]) => {
         this.affectations = Response;
-         console.log(this.affectations);
+        console.log(this.affectations);
         switch (this.storageService.getUser().roles[0]) {
           case 'ROLE_ADMIN':
             this.testall();
             break;
           case 'ROLE_PROF':
-          //  this.testprof();
+            this.testprof();
             break;
           case 'ROLE_ETUDIANT':
+            
             console.log('Option 3 selected');
             break;
           default:
@@ -96,66 +95,63 @@ export class TestComponent implements OnInit {
   }
 
   public update_case(a: HTMLElement | null, i: number) {
-    if (this.affectations[i]?.matiere !== undefined && this.affectations[i]?.section) {
+    if (
+      this.affectations[i]?.matiere !== undefined &&
+      this.affectations[i]?.section
+    ) {
       if (a) {
         a.removeAttribute('disabled');
         a.classList.remove('btn-secondary');
         a.classList.add('btn-success');
-        a.textContent = this.affectations[i]?.matiere?.name +
-          '\n' +
+        a.textContent =
+          this.affectations[i]?.matiere?.name +
+          '  ' +
+          this.affectations[i]?.salle?.roomNumber +
+          '  ' +
           this.affectations[i]?.section?.sectionName;
       }
     }
   }
-  
-   
 
   public testall() {
     for (let i = 0; i < this.affectations.length; i++) {
       const affectation = this.affectations[i];
       if (affectation?.dayy !== undefined && affectation?.time !== undefined) {
-        const a = document.getElementById(affectation.dayy + affectation.time) as HTMLElement | null;
+        const a = document.getElementById(
+          affectation.dayy + affectation.time
+        ) as HTMLElement | null;
         if (a) {
           this.update_case(a, i);
         }
       }
     }
   }
-  
 
-  // public testprof() {
-  //   if (this.affectations !== undefined) {
-  //     for (let i = 0; i < this.affectations.length; i++) {
-  //       if (
-  //         this.affectations[i]?.professors !== undefined &&
-  //         this.affectations[i]?.professors.length > 0
-  //       ) {
-  //         for (let j = 0; j < this.affectations[i].professors.length; j++) {
-  //           this.currentUser = this.storageService.getUser();
-  //           if (
-  //             this.affectations[i]?.professors[j]?.username ===
-  //             this.currentUser?.username
-  //           ) {
-  //             const a = document.getElementById(
-  //               this.affectations[i]?.dayy + this.affectations[i]?.time
-  //             );
-  //             if (a !== null) {
-  //               this.update_case(a, i);
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-  
-  
+  public testprof() {
+    for (let i = 0; i < this.affectations.length; i++) {
+      for (
+        let j = 0;
+        j < (this.affectations[i]?.professors ?? []).length;
+        j++
+      ) {
+        this.currentUser = this.storageService.getUser();
+        if (
+          this.affectations[i]?.professors?.[j]?.username ===
+          this.currentUser?.username
+        ) {
+          const dayy = this.affectations[i]?.dayy ?? '';
+          const time = this.affectations[i]?.time ?? '';
+          const a = document.getElementById(dayy + time);
+          if (a !== null) {
+            this.update_case(a, i);
+          }
+        }
+      }
+    }
+  }
 
-
-
-
-  public onOpenModal(affectation: Affectation | null , mode: string): void {
-    const container = document.getElementById('main-container') ;
+  public onOpenModal(affectation: Affectation | null, mode: string): void {
+    const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
     button.style.display = 'none';
@@ -210,7 +206,6 @@ export class TestComponent implements OnInit {
       }
     );
   }
-  
 
   public getmatieres(): void {
     this.matiereService.getMatieres().subscribe(
@@ -292,18 +287,13 @@ export class TestComponent implements OnInit {
     );
   }
 
-
-
   public testetudiant() {}
 
   callAddSectionAffectation(newAffectation: Affectation) {
     const selectedSection = this.affectation.section;
     if (selectedSection !== undefined && newAffectation.id) {
       console.log(selectedSection);
-      return this.service.addSection(
-        newAffectation.id,
-        selectedSection.id
-      );
+      return this.service.addSection(newAffectation.id, selectedSection.id);
     } else {
       return of(null);
     }
@@ -313,10 +303,7 @@ export class TestComponent implements OnInit {
     const selectedMatiere = this.affectation.matiere;
     if (selectedMatiere !== undefined && newAffectation.id) {
       console.log(selectedMatiere);
-      return this.service.addMatiere(
-        newAffectation.id,
-        selectedMatiere.id
-      );
+      return this.service.addMatiere(newAffectation.id, selectedMatiere.id);
     } else {
       return of(null);
     }
@@ -326,17 +313,14 @@ export class TestComponent implements OnInit {
     const selectedSalle = this.affectation.salle;
     if (selectedSalle !== undefined && newAffectation.id) {
       console.log(selectedSalle);
-      return this.service.addSalle(
-        newAffectation.id,
-        selectedSalle.id
-      );
+      return this.service.addSalle(newAffectation.id, selectedSalle.id);
     } else {
       return of(null);
     }
   }
 
   callProfToAffectation(newAffectation: Affectation) {
-    const selectedProfs = this.affectation.professors; 
+    const selectedProfs = this.affectation.professors;
     if (
       selectedProfs !== undefined &&
       selectedProfs.length > 0 &&
@@ -358,7 +342,6 @@ export class TestComponent implements OnInit {
         id: 0,
         dayy: this.affectation.dayy,
         time: this.affectation.time,
-
       })
       .pipe(
         mergeMap((newAffectation: Affectation) => {
@@ -368,8 +351,6 @@ export class TestComponent implements OnInit {
           const salleObs = this.callAddSalleAffectation(newAffectation);
           const profObs = this.callProfToAffectation(newAffectation);
           return forkJoin([sectionObs, matiereObs, salleObs, profObs]);
-
-      
         }),
         catchError((error: any) => {
           console.error('error:', error);
@@ -385,6 +366,4 @@ export class TestComponent implements OnInit {
         this.router.navigateByUrl('/calendrier');
       });
   }
-
-
 }
