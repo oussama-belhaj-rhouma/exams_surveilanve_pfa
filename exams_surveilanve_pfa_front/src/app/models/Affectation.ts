@@ -5,12 +5,12 @@ import { Matiere } from './Matiere';
 import { Salle } from './Salle';
 
 export interface Affectation {
-  id?: number;
-  dayy: string;
-  section: Section;
-  professors: Prof[];
-  calendrier: Calendrier;
-  matiere: Matiere;
-  salle: Salle;
-  time: string;
+  id: number;
+  dayy?: string;
+  code?: string;
+  section?: Section;
+  professors?: Prof[];
+  matiere?: Matiere;
+  salle?: Salle;
+  time?: string;
 }

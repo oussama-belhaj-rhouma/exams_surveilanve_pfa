@@ -1,7 +1,16 @@
-<div class="container">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+<div class="buttons">
+  <div class="button2">
+    <button type="submit" class="sauvbtn"  role="button" (click)="onOpenModal(null,'add')">Ajouer affectation <span class="sr-only">(current)</span></button>
+</div>
+</div>
+<div class="container" id="main-container">
   <table class="table">
     <thead>
-      <tr>
+
+         <tr>
         <th>heure</th>
         <th>lundi</th>
         <th>mardi</th>
@@ -61,4 +70,207 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+
+
+<!-- add affectation -->
+
+<div class="modal fade" id="addEmployeeModal"  tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+  <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+    <div class="wrapper wrapper--w790">
+      <div class="card card-5">
+        <div class="card-heading">
+          <h2 class="title">Ajouter une affectation de survaillance</h2>
+        </div>
+        <div class="card-body">
+          <form (submit)="onSubmit()">
+            <div class="form-row">
+              <div class="name">Jour</div>
+              <div class="value">
+                <div class="input-group">
+                  <div
+                    class="rs-select2 js-select-simple select--no-search"
+                  >
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      [(ngModel)]="affectation.dayy"
+                      name="dayy"
+                    >
+                      <option disabled="disabled" selected="selected">
+                        Choose option
+                      </option>
+                      <option *ngFor="let j of jours" [value]="j">
+                        {{ j }}
+                      </option>
+                    </select>
+                    <div class="select-dropdown"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="name">temps</div>
+              <div class="value">
+                <div class="input-group">
+                  <div
+                    class="rs-select2 js-select-simple select--no-search"
+                  >
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      [(ngModel)]="affectation.time"
+                      name="dayy"
+                    >
+                      <option disabled="disabled" selected="selected">
+                        Choose option
+                      </option>
+                      <option *ngFor="let t of times" [value]="t">
+                        {{ t }}
+                      </option>
+                    </select>
+                    <div class="select-dropdown"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="name">Section</div>
+              <div class="value">
+                <div class="input-group">
+                  <div
+                    class="rs-select2 js-select-simple select--no-search"
+                  >
+                  <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="affectation.section"
+                  name="section"
+                  required
+                >
+                  <option disabled selected>Choisir des sections</option>
+                  <option *ngFor="let section of sections" [ngValue]="section">{{ section.sectionName }}</option>
+                </select>
+                    <div class="select-dropdown"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-row">
+              <div class="name">Matiere</div>
+              <div class="value">
+                <div class="input-group">
+                  <div
+                    class="rs-select2 js-select-simple select--no-search"
+                  >
+                  <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="affectation.matiere"
+                  name="matiere"
+
+                  required
+                >
+                  <option disabled selected>Choisir des matieres</option>
+                  <option *ngFor="let matiere of matieres" [ngValue]="matiere">{{ matiere.name }}</option>
+                </select>
+                    <div class="select-dropdown"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-row">
+              <div class="name">Prof</div>
+              <div class="value">
+                <div class="input-group">
+                  <div class="rs-select2 js-select-simple select--no-search">
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      name="prof"
+                      required
+                      multiple
+                      [(ngModel)]="affectation.professors"
+
+                    >
+                      <!-- [(ngModel)]="etudiant.section" -->
+                      <option disabled="disabled" selected="selected">
+                        Choisir un Professeur
+                      </option>
+                      <option *ngFor="let p of profs" [ngValue]="p">
+                        {{ p.username }}
+                      </option>
+                    </select>
+                    <div class="select-dropdown"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="name">Salle</div>
+              <div class="value">
+                <div class="input-group">
+                  <div class="rs-select2 js-select-simple select--no-search">
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      name="salle"
+                      required
+                      [(ngModel)]="affectation.salle"
+                    >
+                      <!-- [(ngModel)]="etudiant.section" -->
+                      <option disabled="disabled" selected="selected">
+                        Choisir une salle
+                      </option>
+                      <option *ngFor="let s of salles" [ngValue]="s">
+                        {{ s.roomNumber }}
+                      </option>
+                    </select>
+                    <div class="select-dropdown"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="name">Session</div>
+              <div class="value">
+                <div class="input-group">
+                  <div class="rs-select2 js-select-simple select--no-search">
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      name="session"
+                      required
+                    >
+                      <!-- [(ngModel)]="etudiant.section" -->
+                      <option disabled="disabled" selected="selected">
+                        Choisir une session
+                      </option>
+                      <option *ngFor="let s of sessions" [ngValue]="s">
+                        {{ s.sessionName }}
+                      </option>
+                    </select>
+                    <div class="select-dropdown"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <button class="btn btn--radius-2 btn--red" type="submit">
+                Ajouter
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,7 +1,20 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { catchError, forkJoin, mergeMap, of, throwError } from 'rxjs';
 import { Affectation } from 'src/app/models/Affectation';
+import { ESession } from 'src/app/models/ESession';
+import { Matiere } from 'src/app/models/Matiere';
+import { Prof } from 'src/app/models/Prof';
+import { Salle } from 'src/app/models/Salle';
+import { Section } from 'src/app/models/Section';
+import { Session } from 'src/app/models/Session';
 import { AffectationService } from 'src/app/services/affectation/affectation.service';
+import { MatiereService } from 'src/app/services/matiere/matiere.service';
+import { ProfService } from 'src/app/services/prof/prof.service';
+import { SalleService } from 'src/app/services/salle/salle.service';
+import { SectionService } from 'src/app/services/section/section.service';
+import { SessionService } from 'src/app/services/session/session.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
@@ -10,30 +23,54 @@ import { StorageService } from 'src/app/services/storage/storage.service';
   styleUrls: ['./test.component.css'],
 })
 export class TestComponent implements OnInit {
+  public sections!: Section[];
+  public matieres!: Matiere[];
+  public profs!: Prof[];
+  public salles!: Salle[];
+  public affectations!: Affectation[];
+
+  public sessions!: Session[];
+
+  jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+  times = ['8:30-10:00', '10:15-11:45', '12:00-13:30', '13:45-15:15'];
+  affectation: Affectation = {
+    id: 0,
+
+  };
+  content?: string;
+
+
   constructor(
     private service: AffectationService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private sectionService: SectionService,
+    private salleService: SalleService,
+    private matiereService: MatiereService,
+    private profService: ProfService,
+    private sessionService: SessionService,
+    private router: Router
   ) {}
   currentUser: any;
-  jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
-  affectations!: Affectation[];
-  content?: string;
 
   ngOnInit(): void {
     this.getAffectation();
+    this.getmatieres();
+    this.getprofs();
+    this.getsalles();
+    this.getsections();
   }
 
   public getAffectation(): void {
     this.service.getAffectations().subscribe(
       (Response: Affectation[]) => {
         this.affectations = Response;
-        // console.log(this.affectations);
+         console.log(this.affectations);
         switch (this.storageService.getUser().roles[0]) {
           case 'ROLE_ADMIN':
             this.testall();
             break;
           case 'ROLE_PROF':
-            this.testprof();
+          //  this.testprof();
             break;
           case 'ROLE_ETUDIANT':
             console.log('Option 3 selected');
@@ -47,7 +84,7 @@ export class TestComponent implements OnInit {
         if (error.error) {
           try {
             const res = JSON.parse(error.error);
-            this.affectations = res.message;
+            this.affectation = res.message;
           } catch {
             this.content = `Error with status: ${error.status} - ${error.statusText}`;
           }
@@ -59,44 +96,295 @@ export class TestComponent implements OnInit {
   }
 
   public update_case(a: HTMLElement | null, i: number) {
-    a!.removeAttribute('disabled');
-    a!.classList.remove('btn-secondary');
-    a!.classList.add('btn-success');
-    a!.textContent =
-      this.affectations[i].matiere.name +
-      '\n' +
-      this.affectations[i].section.sectionName;
+    if (this.affectations[i]?.matiere !== undefined && this.affectations[i]?.section) {
+      if (a) {
+        a.removeAttribute('disabled');
+        a.classList.remove('btn-secondary');
+        a.classList.add('btn-success');
+        a.textContent = this.affectations[i]?.matiere?.name +
+          '\n' +
+          this.affectations[i]?.section?.sectionName;
+      }
+    }
   }
+  
+   
 
   public testall() {
     for (let i = 0; i < this.affectations.length; i++) {
-      // console.log(this.affectations[i].dayy + this.affectations[i].time);
-      let a = document.getElementById(
-        this.affectations[i].dayy + this.affectations[i].time
-      );
-      this.update_case(a, i);
-    }
-  }
-
-  public testprof() {
-    for (let i = 0; i < this.affectations.length; i++) {
-      for (let j = 0; j < this.affectations[i].professors.length; j++) {
-        this.currentUser = this.storageService.getUser();
-        if (
-          this.affectations[i].professors[j].username ==
-          this.currentUser.username
-        ) {
-          let a = document.getElementById(
-            this.affectations[i].dayy + this.affectations[i].time
-          );
-          this.update_case(a,i);
+      const affectation = this.affectations[i];
+      if (affectation?.dayy !== undefined && affectation?.time !== undefined) {
+        const a = document.getElementById(affectation.dayy + affectation.time) as HTMLElement | null;
+        if (a) {
+          this.update_case(a, i);
         }
       }
     }
   }
-
   
 
+  // public testprof() {
+  //   if (this.affectations !== undefined) {
+  //     for (let i = 0; i < this.affectations.length; i++) {
+  //       if (
+  //         this.affectations[i]?.professors !== undefined &&
+  //         this.affectations[i]?.professors.length > 0
+  //       ) {
+  //         for (let j = 0; j < this.affectations[i].professors.length; j++) {
+  //           this.currentUser = this.storageService.getUser();
+  //           if (
+  //             this.affectations[i]?.professors[j]?.username ===
+  //             this.currentUser?.username
+  //           ) {
+  //             const a = document.getElementById(
+  //               this.affectations[i]?.dayy + this.affectations[i]?.time
+  //             );
+  //             if (a !== null) {
+  //               this.update_case(a, i);
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  
+  
+
+
+
+
+  public onOpenModal(affectation: Affectation | null , mode: string): void {
+    const container = document.getElementById('main-container') ;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'add') {
+      button.setAttribute('data-target', '#addEmployeeModal');
+    }
+    container?.appendChild(button);
+    button.click();
+  }
+
+  //  public addAffectation(
+  //    affectation: Affectation ,
+  //    section: Section | null,
+  //    matiere: Matiere | null,
+  //    prof: Prof | null,
+  //    salle: Salle | null,
+  //    session: Session | null
+  //  ): void {
+  //    this.service.addAffectation(affectation).subscribe(
+  //     (response: Affectation) => {
+  //        console.log(response);
+  //        this.getAffectation();
+  //        this.getsections();
+  //        this.getmatieres();
+  //        this.getprofs();
+  //        this.getsalles();
+  //        this.getsessions();
+  //        this.router.navigate(['/affectation']);
+  //      },
+  //      (error: HttpErrorResponse) => {
+  //        alert(error.message);
+  //      }
+  //    );
+  //  }
+  public getsections(): void {
+    this.sectionService.getSections().subscribe(
+      (Response: Section[]) => {
+        this.sections = Response;
+      },
+      (error: HttpErrorResponse) => {
+        if (error.error) {
+          try {
+            const res = JSON.parse(error.error);
+            this.sections = res.message;
+          } catch {
+            this.content = `Error with status: ${error.status} - ${error.statusText}`;
+          }
+        } else {
+          this.content = `Error with status: ${error.status}`;
+        }
+      }
+    );
+  }
+  
+
+  public getmatieres(): void {
+    this.matiereService.getMatieres().subscribe(
+      (Response: Matiere[]) => {
+        this.matieres = Response;
+      },
+      (error: HttpErrorResponse) => {
+        if (error.error) {
+          try {
+            const res = JSON.parse(error.error);
+            this.matieres = res.message;
+          } catch {
+            this.content = `Error with status: ${error.status} - ${error.statusText}`;
+          }
+        } else {
+          this.content = `Error with status: ${error.status}`;
+        }
+      }
+    );
+  }
+
+  public getprofs(): void {
+    this.profService.getProfs().subscribe(
+      (Response: Prof[]) => {
+        this.profs = Response;
+      },
+      (error: HttpErrorResponse) => {
+        if (error.error) {
+          try {
+            const res = JSON.parse(error.error);
+            this.profs = res.message;
+          } catch {
+            this.content = `Error with status: ${error.status} - ${error.statusText}`;
+          }
+        } else {
+          this.content = `Error with status: ${error.status}`;
+        }
+      }
+    );
+  }
+
+  public getsalles(): void {
+    this.salleService.getSalles().subscribe(
+      (Response: Salle[]) => {
+        this.salles = Response;
+      },
+      (error: HttpErrorResponse) => {
+        if (error.error) {
+          try {
+            const res = JSON.parse(error.error);
+            this.salles = res.message;
+          } catch {
+            this.content = `Error with status: ${error.status} - ${error.statusText}`;
+          }
+        } else {
+          this.content = `Error with status: ${error.status}`;
+        }
+      }
+    );
+  }
+
+  public getsessions(): void {
+    this.sessionService.getSessions().subscribe(
+      (Response: Session[]) => {
+        this.sessions = Response;
+      },
+      (error: HttpErrorResponse) => {
+        if (error.error) {
+          try {
+            const res = JSON.parse(error.error);
+            this.sessions = res.message;
+          } catch {
+            this.content = `Error with status: ${error.status} - ${error.statusText}`;
+          }
+        } else {
+          this.content = `Error with status: ${error.status}`;
+        }
+      }
+    );
+  }
+
+
+
   public testetudiant() {}
+
+  callAddSectionAffectation(newAffectation: Affectation) {
+    const selectedSection = this.affectation.section;
+    if (selectedSection !== undefined && newAffectation.id) {
+      console.log(selectedSection);
+      return this.service.addSection(
+        newAffectation.id,
+        selectedSection.id
+      );
+    } else {
+      return of(null);
+    }
+  }
+
+  callAddMatiereAffectation(newAffectation: Affectation) {
+    const selectedMatiere = this.affectation.matiere;
+    if (selectedMatiere !== undefined && newAffectation.id) {
+      console.log(selectedMatiere);
+      return this.service.addMatiere(
+        newAffectation.id,
+        selectedMatiere.id
+      );
+    } else {
+      return of(null);
+    }
+  }
+
+  callAddSalleAffectation(newAffectation: Affectation) {
+    const selectedSalle = this.affectation.salle;
+    if (selectedSalle !== undefined && newAffectation.id) {
+      console.log(selectedSalle);
+      return this.service.addSalle(
+        newAffectation.id,
+        selectedSalle.id
+      );
+    } else {
+      return of(null);
+    }
+  }
+
+  callProfToAffectation(newAffectation: Affectation) {
+    const selectedProfs = this.affectation.professors; 
+    if (
+      selectedProfs !== undefined &&
+      selectedProfs.length > 0 &&
+      newAffectation.id
+    ) {
+      return forkJoin(
+        selectedProfs.map((prof) =>
+          this.service.addProf(newAffectation.id, prof.id!)
+        )
+      );
+    } else {
+      return of(null);
+    }
+  }
+
+  onSubmit(): void {
+    this.service
+      .addAffectation({
+        id: 0,
+        dayy: this.affectation.dayy,
+        time: this.affectation.time,
+
+      })
+      .pipe(
+        mergeMap((newAffectation: Affectation) => {
+          console.log('Nouveau affectation ajouté:', newAffectation);
+          const sectionObs = this.callAddSectionAffectation(newAffectation);
+          const matiereObs = this.callAddMatiereAffectation(newAffectation);
+          const salleObs = this.callAddSalleAffectation(newAffectation);
+          const profObs = this.callProfToAffectation(newAffectation);
+          return forkJoin([sectionObs, matiereObs, salleObs, profObs]);
+
+      
+        }),
+        catchError((error: any) => {
+          console.error('error:', error);
+
+          if (error.status === 500) {
+            // this.toastr.error('Impossible to load. Please try again later.', 'Error');
+          }
+
+          return throwError(error);
+        })
+      )
+      .subscribe(() => {
+        this.router.navigateByUrl('/calendrier');
+      });
+  }
+
 
 }

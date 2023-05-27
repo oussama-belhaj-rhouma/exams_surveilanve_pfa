@@ -26,6 +26,7 @@ import { UpdateprofComponent } from './components/adminPage/updateprof/updatepro
 import { UpdateetudiantComponent } from './components/adminPage/updateetudiant/updateetudiant.component';
 import { AddetudiantComponent } from './components/adminPage/addetudiant/addetudiant.component';
 
+
 //import { HorizontalScrollMenuModule } from 'ngx-horizontal-scroll-menu';
 @NgModule({
   declarations: [

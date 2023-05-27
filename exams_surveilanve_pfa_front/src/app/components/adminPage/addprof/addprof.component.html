@@ -119,6 +119,25 @@
                             {{ section.sectionName }}
                           </option>
                         </select>
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                          [(ngModel)]="prof.sections"
+                          name="sections"
+                          multiple
+                          required
+                        >
+                          <option disabled selected>
+                            Choisir des sections
+                          </option>
+                          <option
+                            *ngFor="let section of sections"
+                            [ngValue]="section"
+                          >
+                            {{ section.sectionName }}
+                          </option>
+                        </select>
+
                         <div class="select-dropdown"></div>
                       </div>
                     </div>
