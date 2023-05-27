@@ -68,7 +68,7 @@ public class CalendrierController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
 
     public ResponseEntity<Calendrier> addSectionToCalendrierByID(@PathVariable("celendrierId") Long celendrierId,
-                                                                   @PathVariable("sectionId") Long sectionId) {
+                                                                 @PathVariable("sectionId") Long sectionId) {
         Calendrier a = calendrierService.addSectionToCalendrier(celendrierId,sectionId);
         return new ResponseEntity<>(a, HttpStatus.CREATED);
     }

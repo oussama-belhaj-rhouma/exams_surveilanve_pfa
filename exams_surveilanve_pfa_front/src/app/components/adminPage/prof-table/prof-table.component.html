@@ -11,8 +11,8 @@
     >
       <thead>
         <tr>
-          <th>nom</th>
-          <th>prenom</th>
+          <th>nom & prenom</th>
+          <!-- <th>prenom</th> -->
           <th>grade</th>
           <th>email</th>
           <th>section</th>
@@ -23,32 +23,38 @@
 
       <tbody>
         <tr *ngFor="let prof of profs">
-          <td>{{ prof.nom }}</td>
-          <td>{{ prof.prenom }}</td>
+          <td>{{ prof.nom }} {{ prof.prenom }}</td>
+          <!-- <td>{{ prof.prenom }}</td> -->
           <td>{{ prof.grade }}</td>
           <td>{{ prof.email }}</td>
           <td>
-            <ng-container *ngIf="prof.sections && prof.sections.length > 0; else noSections">
+            <ng-container
+              *ngIf="prof.sections && prof.sections.length > 0; else noSections"
+            >
               <ul>
-                <p *ngFor="let section of prof.sections">{{ section.sectionName }}</p>
+                <p *ngFor="let section of prof.sections">
+                  {{ section.sectionName }}
+                </p>
               </ul>
             </ng-container>
             <ng-template #noSections>-</ng-template>
-          </td>  
-         <td>
-            <ng-container *ngIf="prof.matieres && prof.matieres.length > 0; else noMatieres">
+          </td>
+          <td>
+            <ng-container
+              *ngIf="prof.matieres && prof.matieres.length > 0; else noMatieres"
+            >
               <ul>
                 <p *ngFor="let matiere of prof.matieres">{{ matiere.name }}</p>
               </ul>
             </ng-container>
             <ng-template #noMatieres>-</ng-template>
-          </td>  
+          </td>
           <td style="text-align: center">
             <a routerLinkActive="active" href="/updateprof/{{ prof.username }}"
               ><button
                 type="button"
                 class="btn btn-primary"
-                style="margin-right: 20px"
+                style="margin-right: 5px"
               >
                 modifier
               </button>
@@ -56,6 +62,7 @@
             <button
               type="button"
               class="btn btn-danger"
+              (click)="onDeleteProf(prof.id)"
             >
               supprimer
             </button>

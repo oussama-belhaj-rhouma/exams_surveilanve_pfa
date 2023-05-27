@@ -63,7 +63,9 @@
 }
 
 .saber {
-  height: 660px;
+  height: 900px;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .text-bg-dark {

@@ -1,103 +1,113 @@
-<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-  <div class="wrapper wrapper--w790">
-    <div class="card card-5">
-      <div class="card-heading">
-        <h2 class="title">Ajouter un etudiant</h2>
-      </div>
-      <div class="card-body">
-        <form (submit)="onSubmit()">
-          <div class="form-row m-b-55">
-            <div class="name">Nom & Prenom</div>
-            <div class="value">
-              <div class="row row-space">
-                <div class="col-6">
-                  <div class="input-group-desc">
-                    <input
-                      class="input--style-5"
-                      type="text"
-                      [(ngModel)]="etudiant.firstName"
-                      name="prenom"
-                      required
-                    />
-                    <label for="prenom" class="label--desc">prenom</label>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <app-side-bar></app-side-bar>
+    </div>
+    <div class="col-9">
+      <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+          <div class="card card-5">
+            <div class="card-heading">
+              <h2 class="title">Ajouter un etudiant</h2>
+            </div>
+            <div class="card-body">
+              <form (submit)="onSubmit()">
+                <div class="form-row m-b-55">
+                  <div class="name">Nom & Prenom</div>
+                  <div class="value">
+                    <div class="row row-space">
+                      <div class="col-6">
+                        <div class="input-group-desc">
+                          <input
+                            class="input--style-5"
+                            type="text"
+                            [(ngModel)]="etudiant.firstName"
+                            name="prenom"
+                            required
+                          />
+                          <label for="prenom" class="label--desc">prenom</label>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="input-group-desc">
+                          <input
+                            class="input--style-5"
+                            type="text"
+                            [(ngModel)]="etudiant.lastName"
+                            name="nom"
+                            required
+                          />
+                          <label for="nom" class="label--desc">nom</label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="col-6">
-                  <div class="input-group-desc">
-                    <input
-                      class="input--style-5"
-                      type="text"
-                      [(ngModel)]="etudiant.lastName"
-                      name="nom"
-                      required
-                    />
-                    <label for="nom" class="label--desc">nom</label>
+                <div class="form-row">
+                  <div class="name">Email</div>
+                  <div class="value">
+                    <div class="input-group">
+                      <input
+                        class="input--style-5"
+                        type="text"
+                        [(ngModel)]="etudiant.email"
+                        name="email"
+                        required
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="name">Email</div>
-            <div class="value">
-              <div class="input-group">
-                <input
-                  class="input--style-5"
-                  type="text"
-                  [(ngModel)]="etudiant.email"
-                  name="email"
-                  required
-                />
-              </div>
-            </div>
-          </div>
 
-          <div class="form-row">
-            <div class="name">Username</div>
-            <div class="value">
-              <div class="input-group">
-                <input
-                  class="input--style-5"
-                  type="text"
-                  [(ngModel)]="etudiant.username"
-                  name="username"
-                  required
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="name">Section</div>
-            <div class="value">
-              <div class="input-group">
-                <div class="rs-select2 js-select-simple select--no-search">
-                  <select
-                    class="form-select"
-                    aria-label="Default select example"
-                    [(ngModel)]="etudiant.section"
-                    name="section"
-                    required
-                  >
-                    <option disabled="disabled" selected="selected">
-                      Choose option
-                    </option>
-                    <option *ngFor="let s of sections" [ngValue]="s">
-                      {{ s.sectionName }}
-                    </option>
-                  </select>
-                  <div class="select-dropdown"></div>
+                <div class="form-row">
+                  <div class="name">Username</div>
+                  <div class="value">
+                    <div class="input-group">
+                      <input
+                        class="input--style-5"
+                        type="text"
+                        [(ngModel)]="etudiant.username"
+                        name="username"
+                        required
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
+
+                <div class="form-row">
+                  <div class="name">Section</div>
+                  <div class="value">
+                    <div class="input-group">
+                      <div
+                        class="rs-select2 js-select-simple select--no-search"
+                      >
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                          [(ngModel)]="etudiant.section"
+                          name="section"
+                          required
+                        >
+                          <option disabled="disabled" selected="selected">
+                            Choose option
+                          </option>
+                          <option *ngFor="let s of sections" [ngValue]="s">
+                            {{ s.sectionName }}
+                          </option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button class="btn btn--radius-2 btn--red" type="submit">
+                    Ajouter
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
-          <div>
-            <button class="btn btn--radius-2 btn--red" type="submit">
-              Ajouter
-            </button>
-          </div>
-          
-        </form>
+        </div>
       </div>
     </div>
   </div>
