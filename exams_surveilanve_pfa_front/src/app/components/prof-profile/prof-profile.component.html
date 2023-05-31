@@ -1,7 +1,7 @@
 <div id="order" style="background-color: #e7f6f2">
   <div class="parent">
     <div class="container">
-      <p class="text">Bienvenue Mr {{ currentProf.prenom }} </p>
+      <p class="text">Bienvenue Mr {{ currentProf.prenom }}</p>
     </div>
     <img
       src="../../../assets/images/Toppagevector.png"
@@ -43,43 +43,131 @@
       ></div>
     </div>
 
-      <form #updateForm="ngForm" (ngSubmit)="onUpdateProf(updateForm)">
-        <div class="formulaire">
-
+    <form #updateForm="ngForm" (ngSubmit)="onUpdateProf(updateForm)">
+      <div class="formulaire">
         <div class="wrapper">
           <div class="box">
             <label class="label">Prénom:</label>
             <div class="davdouv">
-              <input class="input" [(ngModel)]="currentProf.prenom" id="prenom" type="text" name="prenom" required />
+              <input
+                class="input"
+                [(ngModel)]="currentProf.prenom"
+                id="prenom"
+                type="text"
+                name="prenom"
+                required
+              />
             </div>
           </div>
-          <input class="input" [(ngModel)]="currentProf.id" id="id" type="number" name="id" type="hidden" />
-          <input class="input" [(ngModel)]="currentProf.username" id="username" type="text" name="username" type="hidden" />
-          <input class="input" [(ngModel)]="currentProf.affectations" id="affectations" name="affectations" type="hidden" />
-          <input class="input" [(ngModel)]="currentProf.sections" id="sections" type="text" name="sections" type="hidden" />
-          <input class="input" [(ngModel)]="currentProf.matieres" id="matieres" type="number" name="matieres" type="hidden" />
-          <input class="input" [(ngModel)]="currentProf.grade" id="grade" type="text" name="grade" required type="hidden" />
+          <input
+            class="input"
+            [(ngModel)]="currentProf.id"
+            id="id"
+            type="number"
+            name="id"
+            type="hidden"
+          />
+          <input
+            class="input"
+            [(ngModel)]="currentProf.username"
+            id="username"
+            type="text"
+            name="username"
+            type="hidden"
+          />
+          <input
+            class="input"
+            [(ngModel)]="currentProf.affectations"
+            id="affectations"
+            name="affectations"
+            type="hidden"
+          />
+          <input
+            class="input"
+            [(ngModel)]="currentProf.sections"
+            id="sections"
+            type="text"
+            name="sections"
+            type="hidden"
+          />
+          <input
+            class="input"
+            [(ngModel)]="currentProf.matieres"
+            id="matieres"
+            type="number"
+            name="matieres"
+            type="hidden"
+          />
+          <input
+            class="input"
+            [(ngModel)]="currentProf.grade"
+            id="grade"
+            type="text"
+            name="grade"
+            required
+            type="hidden"
+          />
 
           <div class="box">
             <label class="label">Grade:</label>
             <div class="davdouv">
-              <input class="input" [(ngModel)]="currentProf.grade" id="grade" type="text" name="grade" required  />
+              <input
+                class="input"
+                [(ngModel)]="currentProf.grade"
+                id="grade"
+                type="text"
+                name="grade"
+                required
+              />
             </div>
           </div>
         </div>
         <div class="wrapper">
           <div class="box">
-            <input class="input" [(ngModel)]="currentProf.grade" id="grade" type="text" name="grade" required type="hidden" readonly/>
+            <input
+              class="input"
+              [(ngModel)]="currentProf.grade"
+              id="grade"
+              type="text"
+              name="grade"
+              required
+              type="hidden"
+            />
+
+            <input
+              class="input"
+              [(ngModel)]="currentProf.grade"
+              id="grade"
+              type="text"
+              name="grade"
+              required
+              type="hidden"
+              readonly
+            />
 
             <label class="label">Nom :</label>
             <div class="davdouv">
-              <input class="input" [(ngModel)]="currentProf.nom" id="nom" type="text" name="nom" required />
+              <input
+                class="input"
+                [(ngModel)]="currentProf.nom"
+                id="nom"
+                type="text"
+                name="nom"
+                required
+              />
             </div>
           </div>
           <div class="box">
             <label class="label">Mot de passe:</label>
             <div class="davdouv">
-              <input class="input" [(ngModel)]="currentProf.password" id="password" type="text" name="password" required />
+              <input
+                class="input"
+                [(ngModel)]="currentProf.password"
+                id="password"
+                type="text"
+                name="password"
+                required
+              />
             </div>
           </div>
         </div>
@@ -87,23 +175,30 @@
           <div class="box">
             <label class="label">Email:</label>
             <div class="davdouv2">
-              <input class="input" [(ngModel)]="currentProf.email" id="email" type="text" name="email" required />
+              <input
+                class="input"
+                [(ngModel)]="currentProf.email"
+                id="email"
+                type="text"
+                name="email"
+                required
+              />
             </div>
           </div>
         </div>
         <div class="buttons">
           <div class="button1">
-              <button type="button" id="update-form" class="retour">Annuler</button>
+            <button type="button" id="update-form" class="retour">
+              Annuler
+            </button>
           </div>
           <div class="button2">
-              <button type="submit" class="sauvbtn">Sauvegarder</button>
+            <button type="submit" class="sauvbtn">Sauvegarder</button>
           </div>
         </div>
       </div>
-
-      </form>
+    </form>
   </div>
-
 
   <!-- <Toppage bgImg={true}>COMMANDER MAINTENANT!</Toppage> -->
   <div class="hiscontainer">
@@ -138,14 +233,14 @@
           margin-bottom: 5px;
         "
       ></div>
-      <div   class="cardsContainer" >
-        <app-history-card *ngFor="let item of history ; index as i "
-          number={{i+1}}
+      <div class="cardsContainer">
+        <app-history-card
+          *ngFor="let item of history; index as i"
+          number="{{ i + 1 }}"
           imageUrl="../../../assets/images/Calendar.svg"
-          date={{item.dayy}}
-          section={{item.section!.sectionName}}
+          date="{{ item.dayy }}{{ item.time }}"
+          section="{{ item.section!.sectionName }}"
         ></app-history-card>
-
       </div>
       <div class="arrow-container">
         <div class="arrow left"></div>
