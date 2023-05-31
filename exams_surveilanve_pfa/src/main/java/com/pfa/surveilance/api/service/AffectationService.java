@@ -96,17 +96,18 @@ public class AffectationService {
 
         if (affectation != null && professor != null) {
             String email = professor.getEmail();
-             try{
+            try{
                 affectation.getProfessors().add(professor);
-                emailService.sendEmail(email, "Exima", "check your Exima app to see new assignments");
+                emailService.sendEmail(email, "Exima", "check your Exima app to see new assignments "+"\n section :" + affectation.getSection().getSectionName() +"\n salle :" + affectation.getSalle().getRoomNumber()+"\n matiere :" + affectation.getMatiere().getName()+"\n jour :  " + affectation.getDayy()+"\n heure :" + affectation.getTime() );
                 return affectationRepo.save(affectation);
             } catch (DataIntegrityViolationException e){
-            throw new IllegalArgumentException("Professor with username " + professor.getUsername() + " already exists");
+                throw new IllegalArgumentException("Professor with username " + professor.getUsername() + " already exists");
             }
         } else {
             throw new EntityNotFoundException("Affectation or Professor not found");
         }
     }
+
 
 
     public void deleteAffectation(Long id){

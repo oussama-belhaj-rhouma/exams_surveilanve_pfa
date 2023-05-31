@@ -13,12 +13,15 @@ public class EmailService {
                           String subject,
                           String body){
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("oussama.belhajrhouma@etudiant-fst.utm.tn");
+        message.setFrom("eximaexima11@gmail.com");
         message.setTo(toEmail);
         message.setText(body);
         message.setSubject(subject);
         javaMailSender.send(message);
+        System.out.println("\n \n");
         System.out.println("Mail Sent Successfully");
+        System.out.println("\n \n");
+
     }
 
 }
